@@ -8,19 +8,20 @@
  * @history : 
  	author		version		date			brief
  	임현			1.0.0.		2017-05-22		초안 작성
+ 	임현			1.0.1.		2017-05-23		헝가리안 표기법 제거
  * ------------------------------
  */
 
 package se.smu;
 
 public class Member { // 뱀버 클래스
-	String sID; // 아이디
-	private String sPassword; // 비밀번호
-	String sEmail; // 이메일
+	String ID; // 아이디
+	private String Password; // 비밀번호
+	String Email; // 이메일
 
-	public Member(String sID, String sPassword, String sEmail) {
-		this.sID = sID;
-		this.sPassword = sPassword;
-		this.sEmail = sEmail;
+	public Member(String ID, String Password, String Email) {
+		this.ID = ID;
+		this.Password = Password;
+		this.Email = Email;
 	}
 }
