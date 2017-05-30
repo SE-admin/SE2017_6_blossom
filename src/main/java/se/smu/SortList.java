@@ -1,13 +1,14 @@
 /**
  * @title : SortList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.0.
+ * @version : 1.0.1.
  * @since : 2017 - 05 - 29
  * @brief : 리스트 정렬 코드
  * ------------------------------
- * @history : 코드 초안
- 	author		version		date
- 	황은선	    1.0.0.		2017-05-29
+ * @history
+ 	author		version		date		brief
+ 	황은선		1.0.0.		2017-05-29	초안 작성
+ 	임현			1.0.1.		2017-05-30	if문 주석 처리
  * ------------------------------
  */
 
