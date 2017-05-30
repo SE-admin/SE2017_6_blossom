@@ -1,14 +1,15 @@
 /**
  * @title : SortList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.1.
+ * @version : 1.0.2.
  * @since : 2017 - 05 - 29
- * @brief : 리스트 정렬 코드
+ * @brief
  * ------------------------------
  * @history
  	author		version		date		brief
  	황은선		1.0.0.		2017-05-29	초안 작성
  	임현			1.0.1.		2017-05-30	if문 주석 처리
+ 	임현			1.0.2.		2017-05-30	오타 수정
  * ------------------------------
  */
 
@@ -35,7 +36,7 @@ public class SortList {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?useSSL=false", "root", "0000");
 
-				// 사용할 DB설정, 회원정보에서 ID와 Passward불러오기
+				// 사용할 DB설정, 회원정보에서 ID와 Password불러오기
 				st = conn.createStatement();
 				sql = "USE ListDB";
 				st.execute(sql);
@@ -72,7 +73,7 @@ public class SortList {
 				st.execute(sql);
 
 				
-				rs = st.executeQuery("select ID,Passward from MemberInfo");
+				rs = st.executeQuery("select ID,Password from MemberInfo");
 
 				// 실행창 닫기
 				rs.close();
