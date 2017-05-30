@@ -41,30 +41,32 @@ public class SortList {
 				
 				/*주의: 정렬된 내용이 DB저장이 아니라 출력물에만 나타남*/
 				
-				if(/*항목명 정렬버튼을 한번클릭했을경우*/)
+				/*
+				if(항목명 정렬버튼을 한번클릭했을경우)
 				{
 					sql="SELECT ListName, DeadLine, Importance, FinishDay, Finish"
 					   +"FROM ListInfo"
 					   +"ORDER BY ListName asc";
 				}
-				else if(/*마감기한 정렬버튼을 한번클릭했을경우*/)
+				else if(마감기한 정렬버튼을 한번클릭했을경우)
 				{
 					sql="SELECT ListName, DeadLine, Importance, FinishDay, Finish"
 					   +"FROM ListInfo"
 					   +"ORDER BY DeadLine asc";
 				}
-				else if(/*실제마감일 정렬버튼을 한번클릭했을경우*/)
+				else if(실제마감일 정렬버튼을 한번클릭했을경우)
 				{
 					sql="SELECT ListName, DeadLine, Importance, FinishDay, Finish"
 					   +"FROM ListInfo"
 					   +"ORDER BY FinishDay asc";
 				}
-				else if(/*완료여부 정렬버튼을 한번클릭했을경우*/)
+				else if(완료여부 정렬버튼을 한번클릭했을경우)
 				{
 					sql="SELECT ListName, DeadLine, Importance, FinishDay, Finish"
 					   +"FROM ListInfo"
 					   +"ORDER BY Finish asc";
 				}
+				*/
 				
 				st.execute(sql);
 
