@@ -1,13 +1,16 @@
 /**
  * @title : Login.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.1.
+ * @version : 1.0.2.
  * @since : 2017 - 05 - 29
  * @brief : 로그인 코드
  * ------------------------------
- * @history : 주석 수정 및 코드 공백 정리
- 	author		version		date
- 	황은선	    1.0.1.		2017-05-29
+ * @history
+ 	author		version		date		brief
+ 	황은선		1.0.0.		2017-05-29	초안 작성
+ 	황은선	    1.0.1.		2017-05-29	주석 수정 및 코드 공백 정리
+ 	임현			1.0.2.		2017-05-30	history 주석 수정
+ 	임현			1.0.3.		2017-05-30	DB연동 시도
  * ------------------------------
  */
 
@@ -42,8 +45,8 @@ public class Login {
 			ResultSet rs = null;
 
 			// DB연동
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?useSSL=false", "root", "0000");
+			Class.forName("com.mysql.cj.jdbc.Driver"); // 1.0.3. 버전에서 DB연동 시도
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
 
 			// 사용할 DB설정, 회원정보에서 ID와 Passward불러오기
 			st = conn.createStatement();
