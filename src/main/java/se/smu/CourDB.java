@@ -1,7 +1,7 @@
 /**
  * @title : CourDB.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.2.
+ * @version : 1.0.3.
  * @since : 2017 - 05 - 29
  * @brief : 과목정보 DB
  * ------------------------------
@@ -10,6 +10,7 @@
  	황은선		1.0.0.		2017-05-29	초안 작성
  	황은선	    1.0.1.		2017-05-29	주석 수정 및 코드 공백 정리
  	임현			1.0.2.		2017-05-30	history 주석 수정
+ 	임현			1.0.3.		2017-05-31	DB 연동
  * ------------------------------
  */
 
@@ -31,8 +32,8 @@ public class CourDB {
 			PreparedStatement pst = null;
 
 			// DB연동
-			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?useSSL=false", "root", "0000"); // JDBC
+			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000"); // JDBC
 																													// 연결
 
 			// DB생성, TABLE생성
