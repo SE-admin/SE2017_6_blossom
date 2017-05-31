@@ -21,6 +21,7 @@ import java.sql.*;
 import se.smu.*;
 
 public class LoginSolution extends JFrame{
+	String usermail;
 	JButton jb1;
 	JTextField jt1;
 
@@ -56,7 +57,9 @@ public class LoginSolution extends JFrame{
 		
 		jb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-								
+				usermail = jt.getText(); // 텍스트 필드에 있는 값을 가져옴
+				new MailSend(usermail); // user의 mail에 메일 전송
+				setVisible(false);
 			}
 		});
 	}
