@@ -1,7 +1,7 @@
 /**
  * @title : Join.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.1.2.
+ * @version : 1.1.3.
  * @since : 2017 - 05 - 29
  * @brief : 회원가입 코드
  * ------------------------------
@@ -13,6 +13,7 @@
  	임현			1.1.0.		2017-05-31	UI 연동
  	임현			1.1.1.		2017-05-31	UI, DB, 기능 연동 성공
  	임현			1.1.2.		2017-05-31	Passward 오타 수정
+ 	임현			1.1.3.		2017-05-31	UI 변수명 수정
  * ------------------------------
  */
 
@@ -33,9 +34,8 @@ public class Join extends JFrame{
 	static String Email;
 	
 	// UI 변수 선언
-	JButton jb1; // 입력 버튼
-	JTextField jt1, jt2, jt3; // 아이디, 비밀번호, 이메일
-	// JPasswordField jpw; // 비밀번호
+	JButton registButton; // 입력 버튼
+	JTextField idTextField, pwTextField, mailTextField; // 아이디, 비밀번호, 이메일
 
 	// 회원정보 입력받기
 	public Join() {
@@ -49,8 +49,8 @@ public class Join extends JFrame{
 
 		jp1.setLocation(50, 120);
 		jp1.setSize(300, 100);
-		JButton jb1 = new JButton("입력");
-		jp1.add(jb1);
+		JButton registButton = new JButton("입력");
+		jp1.add(registButton);
 		add(jp1);
 
 		jp2.setLocation(10, 10);
@@ -64,24 +64,22 @@ public class Join extends JFrame{
 		jp3.setLocation(150, 10);
 		jp3.setSize(200, 90);
 		jp3.setLayout(new GridLayout(3, 1));
-		JTextField jt1 = new JTextField();
-		JTextField jt2 = new JTextField();
-		JTextField jt3 = new JTextField();
-		//JPasswordField jpw = new JPasswordField();
-		jp3.add(jt1);
-		jp3.add(jt2);
-		jp3.add(jt3);
-		// jp3.add(jpw);
+		JTextField idTextField = new JTextField();
+		JTextField pwTextField = new JTextField();
+		JTextField mailTextField = new JTextField();
+		jp3.add(idTextField);
+		jp3.add(pwTextField);
+		jp3.add(mailTextField);
 		add(jp3);
 
 		setSize(400, 200);
 		setVisible(true);
 		
-		jb1.addActionListener(new ActionListener() {
+		registButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ID = jt1.getText();
-				Email = jt2.getText();
-				Password = jt3.getText();
+				ID = idTextField.getText();
+				Email = pwTextField.getText();
+				Password = mailTextField.getText();
 				MemberDB memberdb = new MemberDB();
 				memberdb.MemberTable(ID, Password, Email);
 			}
