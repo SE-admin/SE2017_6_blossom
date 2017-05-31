@@ -1,7 +1,7 @@
 /**
  * @title : Login.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.1.0.
+ * @version : 1.2.0.
  * @since : 2017 - 05 - 29
  * @brief : 로그인 코드
  * ------------------------------
@@ -13,6 +13,7 @@
  	임현			1.0.3.		2017-05-30	DB연동 시도
  	임현			1.0.4.		2017-05-31	Passward 오타 수정
  	임현			1.1.0.		2017-05-31	UI, DB, 기능 연동
+ 	임현			1.2.0.		2017-05-31	회원가입 연동
  * ------------------------------
  */
 
@@ -23,7 +24,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 import java.sql.*;
-import se.smu.MemberDB;
+import se.smu.*;
 
 public class Login extends JFrame{
 	// 기본 변수 선언
@@ -117,6 +118,12 @@ public class Login extends JFrame{
 				} catch (ClassNotFoundException | SQLException e1) {
 					e1.printStackTrace();
 				}
+			}
+		});
+		
+		jb2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Join();
 			}
 		});
 	}
