@@ -1,7 +1,7 @@
 /**
  * @title : Join.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.1.3.
+ * @version : 1.1.4.
  * @since : 2017 - 05 - 29
  * @brief : 회원가입 코드
  * ------------------------------
@@ -14,6 +14,7 @@
  	임현			1.1.1.		2017-05-31	UI, DB, 기능 연동 성공
  	임현			1.1.2.		2017-05-31	Passward 오타 수정
  	임현			1.1.3.		2017-05-31	UI 변수명 수정
+ 	임현			1.1.4.		2017-05-31	입력 버튼 누를 시 인터페이스 종료 구현
  * ------------------------------
  */
 
@@ -82,6 +83,7 @@ public class Join extends JFrame{
 				Password = mailTextField.getText();
 				MemberDB memberdb = new MemberDB();
 				memberdb.MemberTable(ID, Password, Email);
+				setVisible(false); // 입력 버튼을 누를 시 인터페이스 종료
 			}
 		});
 	}
