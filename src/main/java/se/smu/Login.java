@@ -112,6 +112,9 @@ public class Login extends JFrame{
 					
 					if ((InputID.equals(ID)) && (InputPassword.equals(Password))) // 입력한 값과 데이터베이스 값이 같은 경우
 						pass = true;
+					else
+						pass = false;
+					
 					System.out.println(pass);
 					// 실행창 닫기
 					rs.close();
