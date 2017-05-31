@@ -11,6 +11,7 @@
  	황은선	    1.0.1.		2017-05-29	주석 수정 및 코드 공백 정리
  	임현			1.0.2.		2017-05-30	history 주석 수정
  	임현			1.1.0.		2017-05-31	UI 연동
+ 	임현			1.1.1.		2017-05-31	UI, DB, 기능 연동 성공
  * ------------------------------
  */
 
@@ -80,16 +81,13 @@ public class Join extends JFrame{
 				ID = jt1.getText();
 				Email = jt2.getText();
 				Passward = jt3.getText();
-				System.out.println(ID);
-				System.out.println(Email);
-				System.out.println(Passward);
+				MemberDB memberdb = new MemberDB();
+				memberdb.MemberTable(ID, Passward, Email);
 			}
 		});
 	}
 
 	public static void main(String[] args) {
 		new Join();
-		MemberDB memberdb = new MemberDB();
-		memberdb.MemberTable(ID, Passward, Email);
 	}
 }
