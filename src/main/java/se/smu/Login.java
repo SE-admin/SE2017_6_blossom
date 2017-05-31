@@ -1,7 +1,7 @@
 /**
  * @title : Login.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.2.0.
+ * @version : 1.3.0.
  * @since : 2017 - 05 - 29
  * @brief : 로그인 코드
  * ------------------------------
@@ -14,6 +14,7 @@
  	임현			1.0.4.		2017-05-31	Passward 오타 수정
  	임현			1.1.0.		2017-05-31	UI, DB, 기능 연동
  	임현			1.2.0.		2017-05-31	회원가입 연동
+ 	임현			1.3.0.		2017-05-31	로그인 문제 해결 구현
  * ------------------------------
  */
 
@@ -88,7 +89,7 @@ public class Login extends JFrame{
 		setSize(350, 300);
 		setVisible(true);
 		
-		jb1.addActionListener(new ActionListener() {
+		jb1.addActionListener(new ActionListener() { // 로그인
 			public void actionPerformed(ActionEvent e) {
 				try {
 					// DB연동
@@ -121,9 +122,15 @@ public class Login extends JFrame{
 			}
 		});
 		
-		jb2.addActionListener(new ActionListener() {
+		jb2.addActionListener(new ActionListener() { // 회원가입
 			public void actionPerformed(ActionEvent e) {
 				new Join();
+			}
+		});
+		
+		jb3.addActionListener(new ActionListener() { // 로그인 문제해결
+			public void actionPerformed(ActionEvent e) {
+				new LoginSolution();
 			}
 		});
 	}
@@ -131,5 +138,4 @@ public class Login extends JFrame{
 	public static void main(String[] args) {
 		new Login();
 	}
-
 }
