@@ -1,7 +1,7 @@
 /**
  * @title : MemberDB.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.2.
+ * @version : 1.0.3.
  * @since : 2017 - 05 - 29
  * @brief : 회원정보 DB
  * ------------------------------
@@ -10,6 +10,7 @@
  	황은선		1.0.0.		2017-05-29	초안 작성
  	황은선	    1.0.1.		2017-05-29	주석 수정 및 코드 공백 정리
  	임현			1.0.2.		2017-05-30	history 주석 수정
+ 	임현			1.0.3.		2017-05-31	Passward 오타 수정
  * ------------------------------
  */
 
@@ -20,7 +21,7 @@ import java.util.Scanner;
 import se.smu.Join;
 
 public class MemberDB {
-	void MemberTable(String ID, String Passward, String Email) {
+	void MemberTable(String ID, String Password, String Email) {
 		try {
 			// 기본 변수 선언
 			Scanner in = new Scanner(System.in);
@@ -28,10 +29,10 @@ public class MemberDB {
 			String sql;
 			Statement st = null;
 			PreparedStatement pst = null;
-
+			
 			// DB연동
-			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?useSSL=false", "root", "0000"); // JDBC
+			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000"); // JDBC
 																													// 연결
 
 			// DB생성,TABLE생성
@@ -40,16 +41,16 @@ public class MemberDB {
 			st.execute(sql);
 			sql = "USE MemberDB";
 			st.execute(sql);
-			sql = "CREATE TABLE MemberInfo (ID char(30), Passward char(40), Email char(60))";
+			sql = "CREATE TABLE MemberInfo (ID char(30), Password char(40), Email char(60))";
 			st.execute(sql);
 
 			// 입력받은 회원정보를 DB에 삽입
-			sql = "INSERT INTO MemberInfo(ID,Passward,Email) values(?,?,?)";
+			sql = "INSERT INTO MemberInfo(ID,Password,Email) values(?,?,?)";
 			pst = conn.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery("select ID, Passward, Email from MemberInfo");
+			ResultSet rs = pst.executeQuery("select ID, Password, Email from MemberInfo");
 
 			pst.setString(1, ID);
-			pst.setString(2, Passward);
+			pst.setString(2, Password);
 			pst.setString(3, Email);
 			pst.executeUpdate();
 

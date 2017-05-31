@@ -1,7 +1,7 @@
 /**
  * @title : Join.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.1.0.
+ * @version : 1.1.2.
  * @since : 2017 - 05 - 29
  * @brief : 회원가입 코드
  * ------------------------------
@@ -12,6 +12,7 @@
  	임현			1.0.2.		2017-05-30	history 주석 수정
  	임현			1.1.0.		2017-05-31	UI 연동
  	임현			1.1.1.		2017-05-31	UI, DB, 기능 연동 성공
+ 	임현			1.1.2.		2017-05-31	Passward 오타 수정
  * ------------------------------
  */
 
@@ -28,7 +29,7 @@ public class Join extends JFrame{
 	// 기본 변수 선언
 	Scanner in = new Scanner(System.in);
 	static String ID;
-	static String Passward;
+	static String Password;
 	static String Email;
 	
 	// UI 변수 선언
@@ -80,9 +81,9 @@ public class Join extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				ID = jt1.getText();
 				Email = jt2.getText();
-				Passward = jt3.getText();
+				Password = jt3.getText();
 				MemberDB memberdb = new MemberDB();
-				memberdb.MemberTable(ID, Passward, Email);
+				memberdb.MemberTable(ID, Password, Email);
 			}
 		});
 	}
