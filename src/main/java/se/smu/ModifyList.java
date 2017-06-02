@@ -1,14 +1,15 @@
 /**
  * @title : ModifyList.java
- * @author : È²Àº¼± (201511077@sangmyung.kr)
- * @version : 1.0.0.
+ * @author : í™©ì€ì„  (201511077@sangmyung.kr)
+ * @version : 1.1.1.
  * @since : 2017 - 05 - 31
- * @brief : ¸®½ºÆ® ¼öÁ¤ ÄÚµå
+ * @brief : ë¦¬ìŠ¤íŠ¸ ìˆ˜ì • ì½”ë“œ
  * ------------------------------
  * @history
-    author      version      date      brief
-        È²Àº¼±      		1.0.0.      2017-05-30   ÃÊ¾È ÀÛ¼º
-        È²Àº¼±			1.0.1.		2017-05-31  ±â´É ¿Ï¼º
+   author		version		date		brief
+        í™©ì€ì„       		1.0.0.      2017-05-30    ì´ˆì•ˆ ì‘ì„±
+        í™©ì€ì„ 			1.1.0.		2017-05-31    ê¸°ëŠ¥ ì™„ì„±
+        ì„í˜„			1.1.1.		2017-06-02	UTF-8 Type ìˆ˜ì •
  * ------------------------------
  */
 
@@ -22,7 +23,7 @@ import java.sql.*;
 import se.smu.ListDB;
 
 public class ModifyList {
-	// ±âº» º¯¼ö ¼±¾ğ
+	// ê¸°ë³¸ ë³€ìˆ˜ ì„ ì–¸
 	Scanner in = new Scanner(System.in);
 	static String ModiListName;
 	static String ModiDeadLine;
@@ -35,7 +36,7 @@ public class ModifyList {
 	static String Finish;
 	static String Importance;
 
-	// ¼öÁ¤µÈ ListÁ¤º¸ ÀÔ·Â
+	// ìˆ˜ì •ëœ Listì •ë³´ ì…ë ¥
 	public ModifyList() {
 		ModiListName = in.next();
 		ModiDeadLine = in.next();
@@ -50,24 +51,24 @@ public class ModifyList {
 		new ModifyList();
 
 		try {
-			// ±âº» º¯¼ö ¼±¾ğ
+			// ê¸°ë³¸ ë³€ìˆ˜ ì„ ì–¸
 			Connection conn = null;
 			String sql;
 			Statement st = null;
 			PreparedStatement pst = null;
 			ResultSet rs = null;
 
-			// DB¿¬µ¿
-			Class.forName("com.mysql.jdbc.Driver"); // 1.0.3. ¹öÀü¿¡¼­ DB¿¬µ¿ ½Ãµµ
+			// DBì—°ë™
+			Class.forName("com.mysql.jdbc.Driver"); // 1.0.3. ë²„ì „ì—ì„œ DBì—°ë™ ì‹œë„
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false", "root", "0000");
 
-			// »ç¿ëÇÒ DB¼³Á¤, ¸®½ºÆ®Á¤º¸ ºÒ·¯¿À±â
+			// ì‚¬ìš©í•  DBì„¤ì •, ë¦¬ìŠ¤íŠ¸ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
 			st = conn.createStatement();
 			sql = "USE ListDB";
 			st.execute(sql);
 			rs = st.executeQuery("Select * from Listinfo");
 
-			// ÀÔ·Â¹ŞÀº ListName°ú ListDBÀÇ Á¤º¸Áß ÀÏÄ¡ÇÏ´Â °ÍÀÌ ÀÖÀ¸¸é »èÁ¦
+			// ì…ë ¥ë°›ì€ ListNameê³¼ ListDBì˜ ì •ë³´ì¤‘ ì¼ì¹˜í•˜ëŠ” ê²ƒì´ ìˆìœ¼ë©´ ì‚­ì œ
 			while (rs.next()) {
 				ListName = rs.getString("ListName");
 				DeadLine = rs.getString("DeadLine");
@@ -91,7 +92,7 @@ public class ModifyList {
 				}
 			}
 
-			// ½ÇÇàÃ¢ ´İ±â
+			// ì‹¤í–‰ì°½ ë‹«ê¸°
 			rs.close();
 			st.close();
 
