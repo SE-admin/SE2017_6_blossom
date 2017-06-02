@@ -1,7 +1,7 @@
 /**
  * @title : ModifyList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.1.1.
+ * @version : 1.2.0.
  * @since : 2017 - 05 - 31
  * @brief : 리스트 수정 코드
  * ------------------------------
@@ -10,6 +10,7 @@
         황은선      		1.0.0.      2017-05-30    초안 작성
         황은선			1.1.0.		2017-05-31    기능 완성
         임현			1.1.1.		2017-06-02	UTF-8 Type 수정
+        임현			1.2.0.		2017-06-02	매개변수 추가
  * ------------------------------
  */
 
@@ -24,7 +25,6 @@ import se.smu.ListDB;
 
 public class ModifyList {
 	// 기본 변수 선언
-	Scanner in = new Scanner(System.in);
 	static String ModiListName;
 	static String ModiDeadLine;
 	static String ModiFinishDay;
@@ -37,19 +37,13 @@ public class ModifyList {
 	static String Importance;
 
 	// 수정된 List정보 입력
-	public ModifyList() {
-		ModiListName = in.next();
-		ModiDeadLine = in.next();
-		ModiFinishDay = in.next();
-		ModiFinish = in.next();
-		ModiImportance = in.next();
-
-	}
-
-	public static void main(String[] args) {
-
-		new ModifyList();
-
+	public ModifyList(String ModiListName, String ModiDeadLine, String ModiFinishDay, String ModiFinish, String ModiImportance) {
+		this.ModiListName = ModiListName;
+		this.ModiDeadLine = ModiDeadLine;
+		this.ModiFinishDay = ModiFinishDay;
+		this.ModiFinish = ModiFinish;
+		this.ModiImportance = ModiImportance;
+		
 		try {
 			// 기본 변수 선언
 			Connection conn = null;
@@ -59,8 +53,8 @@ public class ModifyList {
 			ResultSet rs = null;
 
 			// DB연동
-			Class.forName("com.mysql.jdbc.Driver"); // 1.0.3. 버전에서 DB연동 시도
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false", "root", "0000");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
 
 			// 사용할 DB설정, 리스트정보 불러오기
 			st = conn.createStatement();
@@ -70,7 +64,7 @@ public class ModifyList {
 
 			// 입력받은 ListName과 ListDB의 정보중 일치하는 것이 있으면 삭제
 			while (rs.next()) {
-				ListName = rs.getString("ListName");
+				ModiListName = rs.getString("ListName");
 				DeadLine = rs.getString("DeadLine");
 				FinishDay = rs.getString("FinishDay");
 				Finish = rs.getString("Finish");
@@ -99,6 +93,9 @@ public class ModifyList {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public static void main(String[] args) {
+		new ModifyList(ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);
 	}
 }
