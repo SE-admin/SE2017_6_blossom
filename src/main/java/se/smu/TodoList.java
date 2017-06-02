@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.1.0.
+ * @version : 1.2.0.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -10,6 +10,7 @@
  	임현			1.0.0.		2017-06-01	초안 작성 (InsertList 구현)
  	임현			1.0.1.		2017-06-02	Checkbox false 추가
  	임현			1.1.0.		2017-06-02	DeleteList 연동
+ 	임현			1.2.0.		2017-06-03	ModifyList 연동
  * ------------------------------
  */
 
@@ -34,6 +35,12 @@ public class TodoList extends JFrame {
 	static String FinishDay;
 	static String Finish;
 	static String Importance;
+	
+	String ModiListName;
+	String ModiDeadLine;
+	String ModiFinishDay;
+	String ModiFinish;
+	String ModiImportance;
 	
 	String DeleteListName;
 	
@@ -127,6 +134,21 @@ public class TodoList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DeleteListName = jt1.getText(); // java.sql.SQLException: Operation not allowed after ResultSet closed 오류
 				new DeleteList(DeleteListName);
+			}
+		});
+		
+		jb3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModiListName = jt1.getText();
+				ModiDeadLine = jt2.getText();
+				ModiFinishDay = jt3.getText();
+				if (jck1.isSelected()) 	ModiFinish = "true"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
+				else ModiFinish = "false";
+				if (jck2.isSelected()) 	ModiImportance = "true";
+				else ModiImportance = "false";
+				
+				// java.sql.SQLException: Operation not allowed after ResultSet closed 오류
+				new ModifyList(ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);			
 			}
 		});
 	}
