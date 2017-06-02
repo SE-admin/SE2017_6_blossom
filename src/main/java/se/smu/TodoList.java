@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.0.1.
+ * @version : 1.1.0.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -9,6 +9,7 @@
  	author		version		date		brief
  	임현			1.0.0.		2017-06-01	초안 작성 (InsertList 구현)
  	임현			1.0.1.		2017-06-02	Checkbox false 추가
+ 	임현			1.1.0.		2017-06-02	DeleteList 연동
  * ------------------------------
  */
 
@@ -33,6 +34,8 @@ public class TodoList extends JFrame {
 	static String FinishDay;
 	static String Finish;
 	static String Importance;
+	
+	String DeleteListName;
 	
 	String strFinish;
 	String strImport;
@@ -117,6 +120,13 @@ public class TodoList extends JFrame {
 				
 				ListDB listdb = new ListDB();
 				listdb.ListTable(ListName, DeadLine, FinishDay, Finish, Importance);
+			}
+		});
+		
+		jb2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DeleteListName = jt1.getText(); // java.sql.SQLException: Operation not allowed after ResultSet closed 오류
+				new DeleteList(DeleteListName);
 			}
 		});
 	}
