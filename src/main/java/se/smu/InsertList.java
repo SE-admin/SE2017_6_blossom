@@ -1,7 +1,7 @@
 /**
  * @title : InsertList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.2.
+ * @version : 1.1.0.
  * @since : 2017 - 05 - 29
  * @brief : 리스트 추가 코드
  * ------------------------------
@@ -10,9 +10,13 @@
  	황은선		1.0.0.		2017-05-29	초안 작성
  	황은선	    1.0.1.		2017-05-29	주석 수정 및 코드 공백 정리
  	임현			1.0.2.		2017-05-30	history 주석 수정
+ 	임현			1.2.0.		2017-06-02	코드 사용 일시 중지
  * ------------------------------
  */
 
+// 현재는 TodoList에 UI와 병합하는 코드 사용 중지
+
+/*
 package se.smu;
 
 import java.awt.*;
@@ -46,3 +50,4 @@ public class InsertList {
 		listdb.ListTable(ListName, DeadLine, FinishDay, Finish, Importance);
 	}
 }
+*/
