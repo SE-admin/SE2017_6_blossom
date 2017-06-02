@@ -1,13 +1,14 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.0.0.
+ * @version : 1.0.1.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
  * @history
  	author		version		date		brief
  	임현			1.0.0.		2017-06-01	초안 작성 (InsertList 구현)
+ 	임현			1.0.1.		2017-06-02	Checkbox false 추가
  * ------------------------------
  */
 
@@ -19,8 +20,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import se.smu.*;
-import se.smu.ListDB;
-import se.smu.InsertCourInfo;
 
 public class TodoList extends JFrame {
 	JButton jb1, jb2, jb3;
@@ -32,8 +31,8 @@ public class TodoList extends JFrame {
 	static String ListName;
 	static String DeadLine;
 	static String FinishDay;
-	static String Finish = "false";
-	static String Importance = "false";
+	static String Finish;
+	static String Importance;
 	
 	String strFinish;
 	String strImport;
@@ -110,7 +109,9 @@ public class TodoList extends JFrame {
 				DeadLine = jt2.getText();
 				FinishDay = jt3.getText();
 				if (jck1.isSelected()) 	strFinish = "true"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
+				else strFinish = "false";
 				if (jck2.isSelected()) 	strImport = "true";
+				else strImport = "false";
 				Finish = strFinish;
 				Importance = strImport;
 				
