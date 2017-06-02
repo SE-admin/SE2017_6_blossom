@@ -11,6 +11,7 @@
  	황은선	    1.0.1.		2017-05-29	주석 수정 및 코드 공백 정리
  	임현			1.0.2.		2017-05-30	history 주석 수정
  	임현			1.0.3.		2017-05-31	Passward 오타 수정
+ 	황은선		1.0.4.		2017-06-03	DB 중복 생성 수정
  * ------------------------------
  */
 
@@ -24,30 +25,47 @@ public class MemberDB {
 	void MemberTable(String ID, String Password, String Email) {
 		try {
 			// 기본 변수 선언
+			int Create_Flag = 0;
+			String database;
 			Scanner in = new Scanner(System.in);
 			Connection conn = null;
 			String sql;
 			Statement st = null;
 			PreparedStatement pst = null;
-			
+			ResultSet rs = null;
+
 			// DB연동
 			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000"); // JDBC
-																													// 연결
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false",
+					"root", "0000"); // JDBC 연결
 
-			// DB생성,TABLE생성
 			st = conn.createStatement();
-			sql = "CREATE DATABASE MemberDB";
-			st.execute(sql);
-			sql = "USE MemberDB";
-			st.execute(sql);
-			sql = "CREATE TABLE MemberInfo (ID char(30), Password char(40), Email char(60))";
-			st.execute(sql);
+			rs = st.executeQuery("SHOW DATABASES");
 
-			// 입력받은 회원정보를 DB에 삽입
-			sql = "INSERT INTO MemberInfo(ID,Password,Email) values(?,?,?)";
-			pst = conn.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery("select ID, Password, Email from MemberInfo");
+			while (rs.next()) {
+				database = rs.getString("Database");
+				if (database.equals("memberdb"))
+					Create_Flag = 1;
+			}
+
+			if (Create_Flag == 0)// 해당 DB가 없을 경우 DB생성, TABLE생성
+			{
+				sql = "CREATE DATABASE MemberDB";
+				st.execute(sql);
+				sql = "USE MemberDB";
+				st.execute(sql);
+				sql = "CREATE TABLE MemberInfo (ID char(30), Password char(40), Email char(60))";
+				st.execute(sql);
+			}
+
+			else {// 해당 DB가 존재할 경우
+				sql = "USE MemberDB";
+				st.execute(sql);
+				// 입력받은 회원정보를 DB에 삽입
+				sql = "INSERT INTO MemberInfo(ID,Password,Email) values(?,?,?)";
+				pst = conn.prepareStatement(sql);
+				rs = pst.executeQuery("select ID, Password, Email from MemberInfo");
+			}
 
 			pst.setString(1, ID);
 			pst.setString(2, Password);
