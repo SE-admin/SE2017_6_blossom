@@ -1,7 +1,7 @@
 /**
  * @title : Login.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.3.2.
+ * @version : 1.4.0.
  * @since : 2017 - 05 - 29
  * @brief : 로그인 코드
  * ------------------------------
@@ -17,6 +17,7 @@
  	임현			1.3.0.		2017-05-31	로그인 문제 해결 구현
  	임현			1.3.1.		2017-05-31	로그인 성공/실패 조건문 작성
  	임현			1.3.2.		2017-06-03	ID가 2개일 경우 로그인 해결
+ 	임현			1.4.0.		2017-06-03	로그인 성공 할 시 TodoList, 실패 할 시 ErrorMessage
  * ------------------------------
  */
 
@@ -112,12 +113,17 @@ public class Login extends JFrame{
 					Password=rs.getString("Password");
 					}
 					
-					if ((InputID.equals(ID)) && (InputPassword.equals(Password))) // 입력한 값과 데이터베이스 값이 같은 경우
+					if ((InputID.equals(ID)) && (InputPassword.equals(Password))) { // 입력한 값과 데이터베이스 값이 같은 경우
 						pass = true;
-					else
+						new TodoList();
+						setVisible(false);
+					}
+					else {
 						pass = false;
+						new ErrorMessage();
+					}
 					
-					System.out.println(pass);
+					System.out.println("Login " + pass); // 로그인 성공 유무 확인
 					// 실행창 닫기
 					rs.close();
 					st.close();
