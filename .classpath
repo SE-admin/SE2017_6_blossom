@@ -23,7 +23,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/SE2017_6_blossom/src/main/java/se/smu/jar/javax.mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/SE2017_6_blossom/src/main/java/se/smu/jar/mysql-connector-java-5.1.42-bin.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
