@@ -1,7 +1,7 @@
 /**
  * @title : InsertCourInfo.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.1.0.
+ * @version : 1.1.1.
  * @since : 2017 - 05 - 29
  * @brief : 과목정보 입력 코드
  * ------------------------------
@@ -11,6 +11,7 @@
  	황은선	    1.0.1.		2017-05-29	주석 수정 및 코드 공백 정리
  	임현			1.0.2.		2017-05-30	history 주석 수정
  	임현			1.1.0.		2017-06-03	UI 구현 및 기능 연동
+ 	임현			1.1.1.		2017-06-03	버튼 누를시 UI invisible
  * ------------------------------
  */
 
@@ -93,6 +94,7 @@ public class InsertCourInfo extends JFrame{
 				
 				CourDB courdb = new CourDB();
 				courdb.CourTable(CourName, CourProf, CourDay, CourTime, CourYear, CourSeme);
+				setVisible(false);
 			}
 		});
 	}
