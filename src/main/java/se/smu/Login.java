@@ -1,7 +1,7 @@
 /**
  * @title : Login.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.3.1.
+ * @version : 1.3.2.
  * @since : 2017 - 05 - 29
  * @brief : 로그인 코드
  * ------------------------------
@@ -16,6 +16,7 @@
  	임현			1.2.0.		2017-05-31	회원가입 연동
  	임현			1.3.0.		2017-05-31	로그인 문제 해결 구현
  	임현			1.3.1.		2017-05-31	로그인 성공/실패 조건문 작성
+ 	임현			1.3.2.		2017-06-03	ID가 2개일 경우 로그인 해결
  * ------------------------------
  */
 
@@ -93,6 +94,9 @@ public class Login extends JFrame{
 		jb1.addActionListener(new ActionListener() { // 로그인
 			public void actionPerformed(ActionEvent e) {
 				try {
+					InputID = jt.getText();
+					InputPassword = new String(jpw.getPassword());
+					
 					// DB연동
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
@@ -101,15 +105,12 @@ public class Login extends JFrame{
 					st = conn.createStatement();
 					sql = "USE MemberDB";
 					st.execute(sql);
-					rs = st.executeQuery("select ID,Password from MemberInfo");
+					rs = st.executeQuery("select ID,Password from MemberInfo where ID = '" + InputID + "'");
 
 					while(rs.next()) {
 					ID=rs.getString("ID");
 					Password=rs.getString("Password");
 					}
-					
-					InputID = jt.getText();
-					InputPassword = new String(jpw.getPassword());
 					
 					if ((InputID.equals(ID)) && (InputPassword.equals(Password))) // 입력한 값과 데이터베이스 값이 같은 경우
 						pass = true;
