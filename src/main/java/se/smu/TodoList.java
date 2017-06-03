@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.4.0.
+ * @version : 1.4.1.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -14,17 +14,18 @@
  	임현			1.3.0.		2017-06-03	InsertCourInfo 연동
  	임현			1.3.1.		2017-06-03	ShowTable 함수 추가
  	황은선		1.4.0.		2017-06-04	ShowTable 함수 완성
+ 	임현			1.4.1.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
 package se.smu;
 
+import se.smu.*;
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import se.smu.*;
 import javax.swing.table.DefaultTableModel;
 
 public class TodoList extends JFrame {
@@ -42,13 +43,12 @@ public class TodoList extends JFrame {
 		Statement st = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		DefaultTableModel model = new DefaultTableModel(row, 0);		
-		model.addRow(row);//테이블에 행 추가
+		DefaultTableModel model = new DefaultTableModel(row, 0);
 
 		try{
 			// DB연동
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
+			Class.forName(DataBaseConn.forName);
+			conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000");
 
 			// 사용할 DB설정, 리스트 정보 불러오기
 			st = conn.createStatement();

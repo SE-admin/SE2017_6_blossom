@@ -1,23 +1,24 @@
 /**
  * @title : MailSend.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.0.0.
+ * @version : 1.0.1.
  * @since : 2017 - 05 - 31
  * @brief : 메일을 보내는 소스 코드
  * ------------------------------
  * @history
  	author		version		date		brief
  	임현			1.0.0.		2017-05-31	초안 작성
+ 	임현			1.0.1.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
 package se.smu;
 
+import se.smu.*;
 import java.sql.*;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import se.smu.LoginSolution;
 
 public class MailSend {	
 	static String usermail;
@@ -37,8 +38,8 @@ public class MailSend {
 			String cmd = null;
 			
 			// 데이터 베이스 연동
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
+			Class.forName(DataBaseConn.forName);
+			conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000");
 			
 			st = conn.createStatement();
 			sql = "USE MemberDB";

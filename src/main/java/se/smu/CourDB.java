@@ -1,7 +1,7 @@
 /**
  * @title : CourDB.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.3.
+ * @version : 1.0.5.
  * @since : 2017 - 05 - 29
  * @brief : 과목정보 DB
  * ------------------------------
@@ -12,14 +12,15 @@
  	임현			1.0.2.		2017-05-30	history 주석 수정
  	임현			1.0.3.		2017-05-31	DB 연동
  	황은선		1.0.4.		2017-06-03	DB 중복 생성 수정
+ 	임현			1.0.5.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
 package se.smu;
 
+import se.smu.*;
 import java.sql.*;
 import java.util.Scanner;
-import se.smu.InsertCourInfo;
 
 public class CourDB {
 	void CourTable(String CourName, String CourProf, String CourDay, String CourTime, String CourYear,
@@ -36,9 +37,8 @@ public class CourDB {
 			ResultSet rs = null;
 
 			// DB연동
-			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false",
-					"root", "0000"); // JDBC연결
+			Class.forName(DataBaseConn.forName); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000"); // JDBC연결
 
 			st = conn.createStatement();
 			rs = st.executeQuery("SHOW DATABASES");

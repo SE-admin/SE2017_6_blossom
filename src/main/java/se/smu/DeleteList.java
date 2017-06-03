@@ -1,7 +1,7 @@
 /**
  * @title : DeleteList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.2.0.
+ * @version : 1.2.1.
  * @since : 2017 - 05 - 30
  * @brief : 리스트 삭제 코드
  * ------------------------------
@@ -11,17 +11,18 @@
         황은선       		1.1.0.      2017-05-31    기능 완성 
         임현			1.1.1.		2017-06-02	UTF-8 Type 수정
         임현			1.2.0.		2017-06-02	매개변수 추가
+        임현			1.2.1.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
 package se.smu;
 
+import se.smu.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
 import java.sql.*;
-import se.smu.ListDB;
 
 public class DeleteList {
    // 기본 변수 선언
@@ -40,8 +41,8 @@ public class DeleteList {
              ResultSet rs = null;
 
              // DB연동
-             Class.forName("com.mysql.cj.jdbc.Driver");
-             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
+             Class.forName(DataBaseConn.forName);
+             conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000");
 
              // 사용할 DB설정, 리스트정보 불러오기
              st = conn.createStatement();
