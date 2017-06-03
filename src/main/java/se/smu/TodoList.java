@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.2.0.
+ * @version : 1.3.0.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -11,6 +11,7 @@
  	임현			1.0.1.		2017-06-02	Checkbox false 추가
  	임현			1.1.0.		2017-06-02	DeleteList 연동
  	임현			1.2.0.		2017-06-03	ModifyList 연동
+ 	임현			1.3.0.		2017-06-03	InsertCourInfo 연동
  * ------------------------------
  */
 
@@ -24,7 +25,11 @@ import java.sql.*;
 import se.smu.*;
 
 public class TodoList extends JFrame {
-	JButton jb1, jb2, jb3;
+	public void ShowTable () {
+
+	}
+	
+	JButton jb1, jb2, jb3, jb4;
 	JTextField jt1, jt2, jt3;
 	JTable jtb;
 	JComboBox jcb;
@@ -58,13 +63,15 @@ public class TodoList extends JFrame {
 
 		jp1.setLocation(740, 50);
 		jp1.setSize(400, 30);
-		jp1.setLayout(new GridLayout(1, 3));
+		jp1.setLayout(new GridLayout(1, 4));
 		JButton jb1 = new JButton("추가");
 		JButton jb2 = new JButton("삭제");
 		JButton jb3 = new JButton("변경");
+		JButton jb4 = new JButton("과목 추가");
 		jp1.add(jb1);
 		jp1.add(jb2);
 		jp1.add(jb3);
+		jp1.add(jb4);
 		add(jp1);
 		
 		jp2.setLocation(740, 150);
@@ -122,6 +129,8 @@ public class TodoList extends JFrame {
 				else strFinish = "false";
 				if (jck2.isSelected()) 	strImport = "true";
 				else strImport = "false";
+				
+				
 				Finish = strFinish;
 				Importance = strImport;
 				
@@ -151,6 +160,13 @@ public class TodoList extends JFrame {
 				new ModifyList(ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);			
 			}
 		});
+		
+		jb4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InsertCourInfo();
+			}
+		});
+		
 	}
 	
 	public static void main(String[] args) {
