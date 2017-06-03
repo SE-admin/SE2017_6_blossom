@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.3.0.
+ * @version : 1.3.1.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -12,6 +12,7 @@
  	임현			1.1.0.		2017-06-02	DeleteList 연동
  	임현			1.2.0.		2017-06-03	ModifyList 연동
  	임현			1.3.0.		2017-06-03	InsertCourInfo 연동
+ 	임현			1.3.1.		2017-06-03	ShowTable 함수 추가
  * ------------------------------
  */
 
@@ -25,10 +26,29 @@ import java.sql.*;
 import se.smu.*;
 
 public class TodoList extends JFrame {
+	/**
+	 * @title : ShowTable
+	 * @author : 임현
+	 * @brief : Table을 갱신해주는 함수
+	 */
 	public void ShowTable () {
-
+		String row[] = 
+			{"과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요여부"};
+		String column[][] = 
+			{
+					{"소프트웨어공학", "요구사항명세서 작성", "2017-04-28", "2017-04-28", "X", "O"},
+					{"인공지능", "재정상담시스템 구현", "2017-05-01", "2017-05-02", "X", ""}
+			};
+		JTable jtb = new JTable(column, row);
+		jtb.setLocation(10, 10);
+		jtb.setSize(700, 400);
+		JScrollPane js = new JScrollPane(jtb);
+		js.setSize(700, 400);
+		add(js);
 	}
 	
+	
+	// 변수 선언
 	JButton jb1, jb2, jb3, jb4;
 	JTextField jt1, jt2, jt3;
 	JTable jtb;
@@ -103,19 +123,7 @@ public class TodoList extends JFrame {
 		jp3.add(jck2);
 		add(jp3);
 		
-		String row[] = 
-			{"과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요여부"};
-		String column[][] = 
-			{
-					{"소프트웨어공학", "요구사항명세서 작성", "2017-04-28", "2017-04-28", "X", "O"},
-					{"인공지능", "재정상담시스템 구현", "2017-05-01", "2017-05-02", "X", ""}
-			};
-		JTable jtb = new JTable(column, row);
-		jtb.setLocation(10, 10);
-		jtb.setSize(700, 400);
-		JScrollPane js = new JScrollPane(jtb);
-		js.setSize(700, 400);
-		add(js);
+		ShowTable();
 
 		setSize(1200, 400);
 		setVisible(true);
@@ -136,6 +144,8 @@ public class TodoList extends JFrame {
 				
 				ListDB listdb = new ListDB();
 				listdb.ListTable(ListName, DeadLine, FinishDay, Finish, Importance);
+				
+				ShowTable();
 			}
 		});
 		
@@ -143,6 +153,8 @@ public class TodoList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DeleteListName = jt1.getText(); // java.sql.SQLException: Operation not allowed after ResultSet closed 오류
 				new DeleteList(DeleteListName);
+				
+				ShowTable();
 			}
 		});
 		
@@ -157,7 +169,9 @@ public class TodoList extends JFrame {
 				else ModiImportance = "false";
 				
 				// java.sql.SQLException: Operation not allowed after ResultSet closed 오류
-				new ModifyList(ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);			
+				new ModifyList(ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);		
+				
+				ShowTable();
 			}
 		});
 		
@@ -166,7 +180,6 @@ public class TodoList extends JFrame {
 				new InsertCourInfo();
 			}
 		});
-		
 	}
 	
 	public static void main(String[] args) {
