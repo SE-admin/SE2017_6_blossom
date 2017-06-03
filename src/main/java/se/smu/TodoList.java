@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.3.1.
+ * @version : 1.4.0.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -13,6 +13,7 @@
  	임현			1.2.0.		2017-06-03	ModifyList 연동
  	임현			1.3.0.		2017-06-03	InsertCourInfo 연동
  	임현			1.3.1.		2017-06-03	ShowTable 함수 추가
+ 	황은선		1.4.0.		2017-06-04	ShowTable 함수 완성
  * ------------------------------
  */
 
@@ -24,22 +25,54 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import se.smu.*;
+import javax.swing.table.DefaultTableModel;
 
 public class TodoList extends JFrame {
 	/**
 	 * @title : ShowTable
-	 * @author : 임현
+	 * @author : 황은선
 	 * @brief : Table을 갱신해주는 함수
 	 */
 	public void ShowTable () {
-		String row[] = 
-			{"과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요여부"};
-		String column[][] = 
+		// 기본 변수 선언
+		String row[]={"과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요여부"};
+		Connection conn = null;
+		String sql;
+		String str=null;
+		Statement st = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		DefaultTableModel model = new DefaultTableModel(row, 0);		
+		model.addRow(row);//테이블에 행 추가
+
+		try{
+			// DB연동
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false", "root", "0000");
+
+			// 사용할 DB설정, 리스트 정보 불러오기
+			st = conn.createStatement();
+			sql = "USE ListDB";
+			st.execute(sql);
+			rs = st.executeQuery("select * from Listinfo");
+			
+			while(rs.next())
 			{
-					{"소프트웨어공학", "요구사항명세서 작성", "2017-04-28", "2017-04-28", "X", "O"},
-					{"인공지능", "재정상담시스템 구현", "2017-05-01", "2017-05-02", "X", ""}
-			};
-		JTable jtb = new JTable(column, row);
+				for(int i=1;i<6;i++)
+				{
+					row[i]=rs.getString(i);
+				}
+				model.addRow(row);				
+			}
+			rs.close();
+			st.close();
+		}
+		catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		JTable jtb = new JTable(model);
 		jtb.setLocation(10, 10);
 		jtb.setSize(700, 400);
 		JScrollPane js = new JScrollPane(jtb);

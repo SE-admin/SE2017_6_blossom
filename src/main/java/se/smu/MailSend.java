@@ -37,8 +37,8 @@ public class MailSend {
 			String cmd = null;
 			
 			// 데이터 베이스 연동
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false", "root", "0000");
 			
 			st = conn.createStatement();
 			sql = "USE MemberDB";

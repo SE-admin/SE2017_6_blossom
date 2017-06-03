@@ -99,8 +99,8 @@ public class Login extends JFrame{
 					InputPassword = new String(jpw.getPassword());
 					
 					// DB연동
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false", "root", "0000");
+					Class.forName("com.mysql.jdbc.Driver");
+					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false", "root", "0000");
 
 					// 사용할 DB설정, 회원정보에서 ID와 Password불러오기
 					st = conn.createStatement();

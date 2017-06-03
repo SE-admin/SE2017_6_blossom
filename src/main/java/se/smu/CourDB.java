@@ -36,8 +36,8 @@ public class CourDB {
 			ResultSet rs = null;
 
 			// DB연동
-			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 드라이버 로드
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false",
+			Class.forName("com.mysql.jdbc.Driver"); // MySQL 드라이버 로드
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false",
 					"root", "0000"); // JDBC연결
 
 			st = conn.createStatement();
