@@ -16,6 +16,7 @@
  	황은선		1.4.0.		2017-06-04	ShowTable 함수 완성
  	임현			1.4.1.		2017-06-04	데이터베이스 연동 수정
  	임현			1.4.2.		2017-06-04	데이터베이스 연동 수정
+ 	임현			1.4.3.		2017-06-04	InsertCour 함수 추가
  * ------------------------------
  */
 
@@ -30,6 +31,33 @@ import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 public class TodoList extends JFrame {
+	
+	// 변수 선언
+	JButton jb1, jb2, jb3, jb4;
+	JTextField jt1, jt2, jt3;
+	JTable jtb;
+	JComboBox jcb;
+	JCheckBox jck1, jck2;
+	
+	static String ListName;
+	static String DeadLine;
+	static String FinishDay;
+	static String Finish;
+	static String Importance;
+	
+	String ModiListName;
+	String ModiDeadLine;
+	String ModiFinishDay;
+	String ModiFinish;
+	String ModiImportance;
+	
+	String DeleteListName;
+	
+	String strFinish;
+	String strImport;
+	
+	String CourName;
+	
 	/**
 	 * @title : ShowTable
 	 * @author : 황은선
@@ -63,7 +91,7 @@ public class TodoList extends JFrame {
 				{
 					row[i]=rs.getString(i);
 				}
-				model.addRow(row);				
+				model.addRow(row);
 			}
 			rs.close();
 			st.close();
@@ -71,33 +99,52 @@ public class TodoList extends JFrame {
 		catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
 		}
+		
+		JTable jtb = new JTable(model);
+		jtb.setLocation(10, 10);;
+		jtb.setSize(700, 400);
+		JScrollPane js = new JScrollPane(jtb);
+		js.setSize(700, 400);
+		add(js);
 	}
 		
-	
-	
-	// 변수 선언
-	JButton jb1, jb2, jb3, jb4;
-	JTextField jt1, jt2, jt3;
-	JTable jtb;
-	JComboBox jcb;
-	JCheckBox jck1, jck2;
-	
-	static String ListName;
-	static String DeadLine;
-	static String FinishDay;
-	static String Finish;
-	static String Importance;
-	
-	String ModiListName;
-	String ModiDeadLine;
-	String ModiFinishDay;
-	String ModiFinish;
-	String ModiImportance;
-	
-	String DeleteListName;
-	
-	String strFinish;
-	String strImport;
+	/**
+	 * @title : InsertCour
+	 * @author : 임현
+	 * @brief : 과목명을 추가하는 함수
+	 */
+	public void InsertCour () {
+		// 기본 변수 선언
+		Connection conn = null;
+		String sql;
+		String str=null;
+		Statement st = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		try{
+			// DB연동
+			Class.forName(DataBaseConn.forName);
+			conn = DriverManager.getConnection(DataBaseConn.URL, DataBaseConn.ID, DataBaseConn.PASSWORD);
+
+			// 사용할 DB설정, 리스트 정보 불러오기
+			st = conn.createStatement();
+			sql = "USE CourDB";
+			st.execute(sql);
+			rs = st.executeQuery("select * CourName from CourInfo");
+			
+			while(rs.next()) {
+				CourName = rs.getString("CourName"); // 수정 요망
+				jcb.addItem(CourName);
+			}
+			
+			rs.close();
+			st.close();
+		}
+		catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 	
 	TodoList() {
 		setTitle("To do List");
@@ -136,7 +183,7 @@ public class TodoList extends JFrame {
 		jp3.setSize(200, 180);
 		jp3.setLayout(new GridLayout(6, 1));
 		JComboBox jcb = new JComboBox();
-		jcb.addItem("소프트웨어공학"); // 과목 추가 요망
+		InsertCour();
 		JCheckBox jck1 = new JCheckBox(" 완료");
 		JCheckBox jck2 = new JCheckBox(" 중요");
 		JTextField jt1 = new JTextField();
