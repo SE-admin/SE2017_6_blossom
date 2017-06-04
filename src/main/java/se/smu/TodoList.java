@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.4.7.
+ * @version : 1.5.0.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -21,6 +21,7 @@
  	임현			1.4.5.		2017-06-04	InsertCour 함수 삭제
  	임현			1.4.6.		2017-06-04	UI 변수명 변경
  	임현			1.4.7.		2017-06-04	CourName, Hide 추가
+ 	임현			1.5.0.		2017-06-04	CourName, Hide 테이블 추가
  * ------------------------------
  */
 
@@ -40,7 +41,7 @@ public class TodoList extends JFrame {
 	JButton jb1, jb2, jb3, jb4;
 	JTextField jt4, listnameTextField, deadlineTextField, finishdayTextField;
 	JTable jtb;
-	JCheckBox jck1, jck2;
+	JCheckBox jck1, jck2, jck3;
 	
 	static String CourName;
 	static String ListName;
@@ -58,9 +59,6 @@ public class TodoList extends JFrame {
 	
 	String DeleteListName;
 	
-	String strFinish;
-	String strImport;
-	
 	/**
 	 * @title : ShowTable
 	 * @author : 황은선
@@ -68,7 +66,7 @@ public class TodoList extends JFrame {
 	 */
 	public void ShowTable () {
 		// 기본 변수 선언
-		String row[]={"과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요여부"};
+		String row[]={"", "과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요 여부", "숨김 여부"};
 		Connection conn = null;
 		String sql;
 		String str=null;
@@ -90,7 +88,7 @@ public class TodoList extends JFrame {
 			
 			while(rs.next())
 			{
-				for(int i=1;i<6;i++)
+				for(int i = 1; i < 8; i++)
 				{
 					row[i]=rs.getString(i);
 				}
@@ -135,20 +133,22 @@ public class TodoList extends JFrame {
 		
 		jp2.setLocation(740, 150);
 		jp2.setSize(90, 180);
-		jp2.setLayout(new GridLayout(6, 1));
+		jp2.setLayout(new GridLayout(7, 1));
 		jp2.add(new JLabel("과목 명"));
 		jp2.add(new JLabel("To do 항목 명"));
 		jp2.add(new JLabel("마감기한"));
 		jp2.add(new JLabel("실제 마감일"));
 		jp2.add(new JLabel("완료 여부"));
 		jp2.add(new JLabel("중요 여부"));
+		jp2.add(new JLabel("숨김 여부"));
 		add(jp2);
 
 		jp3.setLocation(860, 150);
 		jp3.setSize(200, 180);
-		jp3.setLayout(new GridLayout(6, 1));
+		jp3.setLayout(new GridLayout(7, 1));
 		JCheckBox jck1 = new JCheckBox(" 완료");
 		JCheckBox jck2 = new JCheckBox(" 중요");
+		JCheckBox jck3 = new JCheckBox(" 숨김");
 		JTextField jt4 = new JTextField();
 		JTextField listnameTextField = new JTextField();
 		JTextField deadlineTextField = new JTextField();
@@ -159,6 +159,7 @@ public class TodoList extends JFrame {
 		jp3.add(finishdayTextField);
 		jp3.add(jck1);
 		jp3.add(jck2);
+		jp3.add(jck3);
 		add(jp3);
 		
 		ShowTable();
@@ -172,12 +173,12 @@ public class TodoList extends JFrame {
 				ListName = listnameTextField.getText();
 				DeadLine = deadlineTextField.getText();
 				FinishDay = finishdayTextField.getText();
-				if (jck1.isSelected()) 	strFinish = "O"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
-				else strFinish = "X";
-				if (jck2.isSelected()) 	strImport = "O";
-				else strImport = "X";
-				Finish = strFinish;
-				Importance = strImport;
+				if (jck1.isSelected()) 	Finish = "O"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
+				else Finish = "X";
+				if (jck2.isSelected()) 	Importance = "O";
+				else Importance = "X";
+				if (jck3.isSelected()) 	Hide= "O";
+				else Hide = "X";
 				
 				ListDB listdb = new ListDB();
 				listdb.ListTable(CourName, ListName, DeadLine, FinishDay, Finish, Importance, Hide);
@@ -205,6 +206,8 @@ public class TodoList extends JFrame {
 				else ModiFinish = "X";
 				if (jck2.isSelected()) 	ModiImportance = "O";
 				else ModiImportance = "X";
+				if (jck3.isSelected()) 	Hide= "O";
+				else Hide = "X";
 				
 				// java.sql.SQLException: Operation not allowed after ResultSet closed 오류
 				new ModifyList(CourName, ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance, Hide);		
