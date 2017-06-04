@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.5.1.
+ * @version : 2.0.0.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -23,6 +23,7 @@
  	임현			1.4.7.		2017-06-04	CourName, Hide 추가
  	임현			1.5.0.		2017-06-04	CourName, Hide 테이블 추가
  	임현			1.5.1		2017-06-05	테이블 잔오류 해결
+ 	임현			2.0.0.		2017-06-05	숨기기 및 보이기 기능 추가
  * ------------------------------
  */
 
@@ -39,7 +40,7 @@ import javax.swing.table.DefaultTableModel;
 public class TodoList extends JFrame {
 	
 	// 변수 선언
-	JButton jb1, jb2, jb3, jb4;
+	JButton jb1, jb2, jb3, jb4, jb5, jb6;
 	JTextField jt4, listnameTextField, deadlineTextField, finishdayTextField;
 	JTable jtb;
 	JCheckBox jck1, jck2, jck3;
@@ -59,6 +60,8 @@ public class TodoList extends JFrame {
 	String ModiImportance;
 	
 	String DeleteListName;
+	
+	Boolean showHide = false;
 	
 	/**
 	 * @title : ShowTable
@@ -85,7 +88,10 @@ public class TodoList extends JFrame {
 			st = conn.createStatement();
 			sql = "USE ListDB";
 			st.execute(sql);
-			rs = st.executeQuery("select * from Listinfo");
+			if (showHide == true)
+				rs = st.executeQuery("select * from Listinfo");
+			else 
+				rs = st.executeQuery("select * from Listinfo where Hide = 'X'");
 			
 			while(rs.next())
 			{
@@ -121,16 +127,20 @@ public class TodoList extends JFrame {
 		JPanel jp3 = new JPanel();
 
 		jp1.setLocation(740, 50);
-		jp1.setSize(400, 30);
-		jp1.setLayout(new GridLayout(1, 4));
+		jp1.setSize(400, 60);
+		jp1.setLayout(new GridLayout(2, 3));
 		JButton jb1 = new JButton("추가");
 		JButton jb2 = new JButton("삭제");
 		JButton jb3 = new JButton("변경");
 		JButton jb4 = new JButton("과목 추가");
+		JButton jb5 = new JButton("숨기기");
+		JButton jb6 = new JButton("보이기");
 		jp1.add(jb1);
 		jp1.add(jb2);
 		jp1.add(jb3);
 		jp1.add(jb4);
+		jp1.add(jb5);
+		jp1.add(jb6);
 		add(jp1);
 		
 		jp2.setLocation(740, 150);
@@ -221,6 +231,20 @@ public class TodoList extends JFrame {
 		jb4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InsertCourInfo();
+			}
+		});
+		
+		jb5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showHide = false;
+				ShowTable();
+			}
+		});
+		
+		jb6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showHide = true;
+				ShowTable();
 			}
 		});
 	}
