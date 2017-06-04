@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.4.6.
+ * @version : 1.4.7.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -20,6 +20,7 @@
  	황은선		1.4.4.		2017-06-04	InsertCour 함수 수정 시도
  	임현			1.4.5.		2017-06-04	InsertCour 함수 삭제
  	임현			1.4.6.		2017-06-04	UI 변수명 변경
+ 	임현			1.4.7.		2017-06-04	CourName, Hide 추가
  * ------------------------------
  */
 
@@ -41,11 +42,13 @@ public class TodoList extends JFrame {
 	JTable jtb;
 	JCheckBox jck1, jck2;
 	
+	static String CourName;
 	static String ListName;
 	static String DeadLine;
 	static String FinishDay;
 	static String Finish;
 	static String Importance;
+	static String Hide;
 	
 	String ModiListName;
 	String ModiDeadLine;
@@ -57,8 +60,6 @@ public class TodoList extends JFrame {
 	
 	String strFinish;
 	String strImport;
-	
-	String CourName;
 	
 	/**
 	 * @title : ShowTable
@@ -167,6 +168,7 @@ public class TodoList extends JFrame {
 		
 		jb1.addActionListener(new ActionListener() { // InsertList.java 참고
 			public void actionPerformed(ActionEvent e) {
+				CourName = jt4.getText();
 				ListName = listnameTextField.getText();
 				DeadLine = deadlineTextField.getText();
 				FinishDay = finishdayTextField.getText();
@@ -174,13 +176,11 @@ public class TodoList extends JFrame {
 				else strFinish = "X";
 				if (jck2.isSelected()) 	strImport = "O";
 				else strImport = "X";
-				
-				
 				Finish = strFinish;
 				Importance = strImport;
 				
 				ListDB listdb = new ListDB();
-				listdb.ListTable(ListName, DeadLine, FinishDay, Finish, Importance);
+				listdb.ListTable(CourName, ListName, DeadLine, FinishDay, Finish, Importance, Hide);
 				
 				ShowTable();
 			}
@@ -197,6 +197,7 @@ public class TodoList extends JFrame {
 		
 		jb3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CourName = jt4.getText();
 				ModiListName = listnameTextField.getText();
 				ModiDeadLine = deadlineTextField.getText();
 				ModiFinishDay = finishdayTextField.getText();
@@ -206,7 +207,7 @@ public class TodoList extends JFrame {
 				else ModiImportance = "X";
 				
 				// java.sql.SQLException: Operation not allowed after ResultSet closed 오류
-				new ModifyList(ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);		
+				new ModifyList(CourName, ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance, Hide);		
 				
 				ShowTable();
 			}
