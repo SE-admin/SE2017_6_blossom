@@ -83,7 +83,9 @@ public class ModifyList {
 				Importance = rs.getString("Importance");
 				Hide = rs.getString("Hide");
 
-				if (ModiListName.equals(ListName))
+				if ((ModiCourName.equals(CourName)) || (ModiListName.equals(ListName)) || (ModiDeadLine.equals(DeadLine))
+						|| (ModiFinishDay.equals(FinishDay)) || (ModiFinish.equals(Finish))
+						|| (ModiImportance.equals(Importance) || (ModiHide.equals(Hide))))
 				{
 					sql = "UPDATE Listinfo SET CourName=" + "\'"+ModiCourName+"\'" + "where CourName=" + "\'" +CourName+ "\'";
 					st.execute(sql);
