@@ -25,6 +25,7 @@ import java.awt.event.*;
 import java.util.*;
 import java.sql.*;
 
+
 public class DeleteList {
    // 기본 변수 선언
       Scanner in = new Scanner(System.in);

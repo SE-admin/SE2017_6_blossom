@@ -17,10 +17,10 @@
 package se.smu;
 
 public class DataBaseConn {
-	public static String forName = "com.mysql.cj.jdbc.Driver";
+	public static String forName = "com.mysql.jdbc.Driver";
 	// public static String forName = "com.mysql.jdbc.Driver";
 	
-	public static String URL = "jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false";
+	public static String URL = "jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false";
 	// public static String URL = "jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false";
 	
 	public static String ID = "root";

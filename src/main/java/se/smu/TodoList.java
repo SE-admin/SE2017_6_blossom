@@ -17,6 +17,7 @@
  	임현			1.4.1.		2017-06-04	데이터베이스 연동 수정
  	임현			1.4.2.		2017-06-04	데이터베이스 연동 수정
  	임현			1.4.3.		2017-06-04	InsertCour 함수 추가
+ 	황은선		1.4.4.		2017-06-04	InsertCour 함수 수정 시도
  * ------------------------------
  */
 
@@ -131,7 +132,7 @@ public class TodoList extends JFrame {
 			st = conn.createStatement();
 			sql = "USE CourDB";
 			st.execute(sql);
-			rs = st.executeQuery("select * CourName from CourInfo");
+			rs = st.executeQuery("select * from CourInfo");
 			
 			while(rs.next()) {
 				CourName = rs.getString("CourName"); // 수정 요망
