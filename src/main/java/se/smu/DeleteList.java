@@ -1,7 +1,7 @@
 /**
  * @title : DeleteList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.2.1.
+ * @version : 1.2.2.
  * @since : 2017 - 05 - 30
  * @brief : 리스트 삭제 코드
  * ------------------------------
@@ -12,6 +12,7 @@
         임현			1.1.1.		2017-06-02	UTF-8 Type 수정
         임현			1.2.0.		2017-06-02	매개변수 추가
         임현			1.2.1.		2017-06-04	데이터베이스 연동 수정
+        임현			1.2.2.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
@@ -42,7 +43,7 @@ public class DeleteList {
 
              // DB연동
              Class.forName(DataBaseConn.forName);
-             conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000");
+             conn = DriverManager.getConnection(DataBaseConn.URL, DataBaseConn.ID, DataBaseConn.PASSWORD);
 
              // 사용할 DB설정, 리스트정보 불러오기
              st = conn.createStatement();

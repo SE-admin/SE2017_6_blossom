@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.4.1.
+ * @version : 1.4.2.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -15,6 +15,7 @@
  	임현			1.3.1.		2017-06-03	ShowTable 함수 추가
  	황은선		1.4.0.		2017-06-04	ShowTable 함수 완성
  	임현			1.4.1.		2017-06-04	데이터베이스 연동 수정
+ 	임현			1.4.2.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
@@ -48,7 +49,7 @@ public class TodoList extends JFrame {
 		try{
 			// DB연동
 			Class.forName(DataBaseConn.forName);
-			conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000");
+			conn = DriverManager.getConnection(DataBaseConn.URL, DataBaseConn.ID, DataBaseConn.PASSWORD);
 
 			// 사용할 DB설정, 리스트 정보 불러오기
 			st = conn.createStatement();
@@ -70,15 +71,8 @@ public class TodoList extends JFrame {
 		catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
 		}
-		
-		
-		JTable jtb = new JTable(model);
-		jtb.setLocation(10, 10);
-		jtb.setSize(700, 400);
-		JScrollPane js = new JScrollPane(jtb);
-		js.setSize(700, 400);
-		add(js);
 	}
+		
 	
 	
 	// 변수 선언

@@ -1,7 +1,7 @@
 /**
  * @title : MailSend.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.0.1.
+ * @version : 1.0.2.
  * @since : 2017 - 05 - 31
  * @brief : 메일을 보내는 소스 코드
  * ------------------------------
@@ -9,6 +9,7 @@
  	author		version		date		brief
  	임현			1.0.0.		2017-05-31	초안 작성
  	임현			1.0.1.		2017-06-04	데이터베이스 연동 수정
+ 	임현			1.0.2.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
@@ -39,7 +40,7 @@ public class MailSend {
 			
 			// 데이터 베이스 연동
 			Class.forName(DataBaseConn.forName);
-			conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000");
+			conn = DriverManager.getConnection(DataBaseConn.URL, DataBaseConn.ID, DataBaseConn.PASSWORD);
 			
 			st = conn.createStatement();
 			sql = "USE MemberDB";

@@ -1,7 +1,7 @@
 /**
  * @title : Login.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.4.1.
+ * @version : 1.4.2.
  * @since : 2017 - 05 - 29
  * @brief : 로그인 코드
  * ------------------------------
@@ -19,6 +19,7 @@
  	임현			1.3.2.		2017-06-03	ID가 2개일 경우 로그인 해결
  	임현			1.4.0.		2017-06-03	로그인 성공 할 시 TodoList, 실패 할 시 ErrorMessage
  	임현			1.4.1.		2017-06-04	데이터베이스 연동 수정
+ 	임현			1.4.2.		2017-06-04	데이터베이스 연동 수정
  * ------------------------------
  */
 
@@ -101,7 +102,7 @@ public class Login extends JFrame{
 					
 					// DB연동
 					Class.forName(DataBaseConn.forName);
-					conn = DriverManager.getConnection(DataBaseConn.getConn, "root", "0000");
+					conn = DriverManager.getConnection(DataBaseConn.URL, DataBaseConn.ID, DataBaseConn.PASSWORD);
 
 					// 사용할 DB설정, 회원정보에서 ID와 Password불러오기
 					st = conn.createStatement();
