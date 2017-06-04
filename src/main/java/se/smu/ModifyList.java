@@ -14,6 +14,7 @@
         임현			1.2.1.		2017-06-04	데이터베이스 연동 수정
         임현			1.2.2.		2017-06-04	데이터베이스 연동 수정
         황은선			1.2.3.		2017-06-04	DB에 CourName,Hide행 추가
+        황은선			1.2.4.		2017-06-05	수정 조건문 수정
  * ------------------------------
  */
 
@@ -82,7 +83,7 @@ public class ModifyList {
 				Importance = rs.getString("Importance");
 				Hide = rs.getString("Hide");
 
-				if ((ModiCourName.equals(CourName)) || (ModiListName.equals(ListName)))
+				if (ModiListName.equals(ListName))
 				{
 					sql = "UPDATE Listinfo SET CourName=" + "\'"+ModiCourName+"\'" + "where CourName=" + "\'" +CourName+ "\'";
 					st.execute(sql);
