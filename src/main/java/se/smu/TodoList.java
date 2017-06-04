@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.4.2.
+ * @version : 1.4.6.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -18,6 +18,8 @@
  	임현			1.4.2.		2017-06-04	데이터베이스 연동 수정
  	임현			1.4.3.		2017-06-04	InsertCour 함수 추가
  	황은선		1.4.4.		2017-06-04	InsertCour 함수 수정 시도
+ 	임현			1.4.5.		2017-06-04	InsertCour 함수 삭제
+ 	임현			1.4.6.		2017-06-04	UI 변수명 변경
  * ------------------------------
  */
 
@@ -35,9 +37,8 @@ public class TodoList extends JFrame {
 	
 	// 변수 선언
 	JButton jb1, jb2, jb3, jb4;
-	JTextField jt1, jt2, jt3;
+	JTextField jt4, listnameTextField, deadlineTextField, finishdayTextField;
 	JTable jtb;
-	JComboBox jcb;
 	JCheckBox jck1, jck2;
 	
 	static String ListName;
@@ -109,44 +110,6 @@ public class TodoList extends JFrame {
 		add(js);
 	}
 		
-	/**
-	 * @title : InsertCour
-	 * @author : 임현
-	 * @brief : 과목명을 추가하는 함수
-	 */
-	public void InsertCour () {
-		// 기본 변수 선언
-		Connection conn = null;
-		String sql;
-		String str=null;
-		Statement st = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-
-		try{
-			// DB연동
-			Class.forName(DataBaseConn.forName);
-			conn = DriverManager.getConnection(DataBaseConn.URL, DataBaseConn.ID, DataBaseConn.PASSWORD);
-
-			// 사용할 DB설정, 리스트 정보 불러오기
-			st = conn.createStatement();
-			sql = "USE CourDB";
-			st.execute(sql);
-			rs = st.executeQuery("select * from CourInfo");
-			
-			while(rs.next()) {
-				CourName = rs.getString("CourName"); // 수정 요망
-				jcb.addItem(CourName);
-			}
-			
-			rs.close();
-			st.close();
-		}
-		catch (ClassNotFoundException | SQLException e1) {
-			e1.printStackTrace();
-		}
-	}
-	
 	TodoList() {
 		setTitle("To do List");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -183,17 +146,16 @@ public class TodoList extends JFrame {
 		jp3.setLocation(860, 150);
 		jp3.setSize(200, 180);
 		jp3.setLayout(new GridLayout(6, 1));
-		JComboBox jcb = new JComboBox();
-		InsertCour();
 		JCheckBox jck1 = new JCheckBox(" 완료");
 		JCheckBox jck2 = new JCheckBox(" 중요");
-		JTextField jt1 = new JTextField();
-		JTextField jt2 = new JTextField();
-		JTextField jt3 = new JTextField();
-		jp3.add(jcb);
-		jp3.add(jt1);
-		jp3.add(jt2);
-		jp3.add(jt3);
+		JTextField jt4 = new JTextField();
+		JTextField listnameTextField = new JTextField();
+		JTextField deadlineTextField = new JTextField();
+		JTextField finishdayTextField = new JTextField();
+		jp3.add(jt4);
+		jp3.add(listnameTextField);
+		jp3.add(deadlineTextField);
+		jp3.add(finishdayTextField);
 		jp3.add(jck1);
 		jp3.add(jck2);
 		add(jp3);
@@ -205,13 +167,13 @@ public class TodoList extends JFrame {
 		
 		jb1.addActionListener(new ActionListener() { // InsertList.java 참고
 			public void actionPerformed(ActionEvent e) {
-				ListName = jt1.getText();
-				DeadLine = jt2.getText();
-				FinishDay = jt3.getText();
-				if (jck1.isSelected()) 	strFinish = "true"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
-				else strFinish = "false";
-				if (jck2.isSelected()) 	strImport = "true";
-				else strImport = "false";
+				ListName = listnameTextField.getText();
+				DeadLine = deadlineTextField.getText();
+				FinishDay = finishdayTextField.getText();
+				if (jck1.isSelected()) 	strFinish = "O"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
+				else strFinish = "X";
+				if (jck2.isSelected()) 	strImport = "O";
+				else strImport = "X";
 				
 				
 				Finish = strFinish;
@@ -226,7 +188,7 @@ public class TodoList extends JFrame {
 		
 		jb2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DeleteListName = jt1.getText(); // java.sql.SQLException: Operation not allowed after ResultSet closed 오류
+				DeleteListName = listnameTextField.getText(); // java.sql.SQLException: Operation not allowed after ResultSet closed 오류
 				new DeleteList(DeleteListName);
 				
 				ShowTable();
@@ -235,13 +197,13 @@ public class TodoList extends JFrame {
 		
 		jb3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ModiListName = jt1.getText();
-				ModiDeadLine = jt2.getText();
-				ModiFinishDay = jt3.getText();
-				if (jck1.isSelected()) 	ModiFinish = "true"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
-				else ModiFinish = "false";
-				if (jck2.isSelected()) 	ModiImportance = "true";
-				else ModiImportance = "false";
+				ModiListName = listnameTextField.getText();
+				ModiDeadLine = deadlineTextField.getText();
+				ModiFinishDay = finishdayTextField.getText();
+				if (jck1.isSelected()) 	ModiFinish = "O"; // 데이터베이스에 boolean값이 가능할 경우 할 필요 없음
+				else ModiFinish = "X";
+				if (jck2.isSelected()) 	ModiImportance = "O";
+				else ModiImportance = "X";
 				
 				// java.sql.SQLException: Operation not allowed after ResultSet closed 오류
 				new ModifyList(ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);		
