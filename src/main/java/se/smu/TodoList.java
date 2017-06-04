@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.5.0.
+ * @version : 1.5.1.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -22,6 +22,7 @@
  	임현			1.4.6.		2017-06-04	UI 변수명 변경
  	임현			1.4.7.		2017-06-04	CourName, Hide 추가
  	임현			1.5.0.		2017-06-04	CourName, Hide 테이블 추가
+ 	임현			1.5.1		2017-06-05	테이블 잔오류 해결
  * ------------------------------
  */
 
@@ -66,7 +67,7 @@ public class TodoList extends JFrame {
 	 */
 	public void ShowTable () {
 		// 기본 변수 선언
-		String row[]={"", "과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요 여부", "숨김 여부"};
+		String row[]={"  B l o s s o m", "과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요 여부", "숨김 여부"};
 		Connection conn = null;
 		String sql;
 		String str=null;
@@ -101,6 +102,7 @@ public class TodoList extends JFrame {
 			e1.printStackTrace();
 		}
 		
+		// 테이블 첫번째 값 해결 가능 시 해결 요망
 		JTable jtb = new JTable(model);
 		jtb.setLocation(10, 10);;
 		jtb.setSize(700, 400);
