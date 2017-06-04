@@ -1,7 +1,7 @@
 /**
  * @title : ListDB.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.5.
+ * @version : 1.0.6.
  * @since : 2017 - 05 - 29
  * @brief : 리스트 정보 DB
  * ------------------------------
@@ -14,6 +14,7 @@
  	황은선		1.0.4.		2017-06-03	DB 중복 생성 수정
  	임현			1.0.4.		2017-06-04	데이터베이스 연동 수정
  	임현			1.0.5.		2017-06-04	데이터베이스 연동 수정
+ 	황은선		1.0.6.		2017-06-04	DB에 CourName,Hide행 추가
  * ------------------------------
  */
 
@@ -22,7 +23,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class ListDB {
-	void ListTable(String ListName, String DeadLine, String FinishDay, String Finish, String Importance) {
+	void ListTable(String CourName, String ListName, String DeadLine, String FinishDay, String Finish, String Importance, String Hide) {
 		try {
 			// 기본 변수 선언
 			int Create_Flag = 0;
@@ -53,23 +54,25 @@ public class ListDB {
 				st.execute(sql);
 				sql = "USE ListDB";
 				st.execute(sql);
-				sql = "CREATE TABLE ListInfo (ListName char(40), DeadLine char(20), FinishDay char(20), Finish char(5), Importance char(10))";
+				sql = "CREATE TABLE ListInfo (CourName char(20), ListName char(40), DeadLine char(20), FinishDay char(20), Finish char(5), Importance char(10), Hide char(10))";
 				st.execute(sql);
 
 			} else {// 해당 DB가 존재할 경우
 				sql = "USE ListDB";
 				st.execute(sql);
 				// 입력받은 리스트정보를 DB에 삽입
-				sql = "INSERT INTO ListInfo(ListName, DeadLine, FinishDay, Finish, Importance) values(?,?,?,?,?)";
+				sql = "INSERT INTO ListInfo(CourName, ListName, DeadLine, FinishDay, Finish, Importance, Hide) values(?,?,?,?,?,?,?)";
 				pst = conn.prepareStatement(sql);
-				rs = pst.executeQuery("select ListName, DeadLine, FinishDay, Finish, Importance from ListInfo");
+				rs = pst.executeQuery("select CourName, ListName, DeadLine, FinishDay, Finish, Importance, Hide from ListInfo");
 			}
-
-			pst.setString(1, ListName);
-			pst.setString(2, DeadLine);
-			pst.setString(3, FinishDay);
-			pst.setString(4, Finish);
-			pst.setString(5, Importance);
+			
+			pst.setString(1, CourName);
+			pst.setString(2, ListName);
+			pst.setString(3, DeadLine);
+			pst.setString(4, FinishDay);
+			pst.setString(5, Finish);
+			pst.setString(6, Importance);
+			pst.setString(7, Hide);
 			pst.executeUpdate();
 
 			// 실행창 닫기
