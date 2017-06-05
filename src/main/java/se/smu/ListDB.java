@@ -1,7 +1,7 @@
 /**
  * @title : ListDB.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.0.6.
+ * @version : 1.1.0.
  * @since : 2017 - 05 - 29
  * @brief : 리스트 정보 DB
  * ------------------------------
@@ -14,7 +14,8 @@
  	황은선		1.0.4.		2017-06-03	DB 중복 생성 수정
  	임현			1.0.4.		2017-06-04	데이터베이스 연동 수정
  	임현			1.0.5.		2017-06-04	데이터베이스 연동 수정
- 	황은선		1.0.6.		2017-06-04	DB에 CourName,Hide행 추가
+ 	황은선		1.0.6.		2017-06-04	DB에 CourName, Hide행 추가
+ 	임현			1.1.0.		2017-06-06	HIDE 삭제
  * ------------------------------
  */
 
@@ -23,7 +24,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class ListDB {
-	void ListTable(String CourName, String ListName, String DeadLine, String FinishDay, String Finish, String Importance, String Hide) {
+	void ListTable(String CourName, String ListName, String DeadLine, String FinishDay, String Finish, String Importance) {
 		try {
 			// 기본 변수 선언
 			int Create_Flag = 0;
@@ -54,16 +55,16 @@ public class ListDB {
 				st.execute(sql);
 				sql = "USE ListDB";
 				st.execute(sql);
-				sql = "CREATE TABLE ListInfo (CourName char(20), ListName char(40), DeadLine char(20), FinishDay char(20), Finish char(5), Importance char(10), Hide char(10))";
+				sql = "CREATE TABLE ListInfo (CourName char(20), ListName char(40), DeadLine char(20), FinishDay char(20), Finish char(5), Importance char(10))";
 				st.execute(sql);
 
 			} else {// 해당 DB가 존재할 경우
 				sql = "USE ListDB";
 				st.execute(sql);
 				// 입력받은 리스트정보를 DB에 삽입
-				sql = "INSERT INTO ListInfo(CourName, ListName, DeadLine, FinishDay, Finish, Importance, Hide) values(?,?,?,?,?,?,?)";
+				sql = "INSERT INTO ListInfo(CourName, ListName, DeadLine, FinishDay, Finish, Importance) values(?,?,?,?,?,?)";
 				pst = conn.prepareStatement(sql);
-				rs = pst.executeQuery("select CourName, ListName, DeadLine, FinishDay, Finish, Importance, Hide from ListInfo");
+				rs = pst.executeQuery("select CourName, ListName, DeadLine, FinishDay, Finish, Importance from ListInfo");
 			}
 			
 			pst.setString(1, CourName);
@@ -72,7 +73,6 @@ public class ListDB {
 			pst.setString(4, FinishDay);
 			pst.setString(5, Finish);
 			pst.setString(6, Importance);
-			pst.setString(7, Hide);
 			pst.executeUpdate();
 
 			// 실행창 닫기
