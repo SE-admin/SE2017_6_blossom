@@ -8,6 +8,7 @@
  * @history
  	author		version		date		brief
  	임현			1.0.0.		2017-06-06	초안 작성
+ 	임현			1.0.1.		2017-06-06	확인 버튼 등록
  * ------------------------------
  */
 
@@ -23,6 +24,7 @@ import javax.swing.table.*;
 
 public class ShowCour extends JFrame {
 	JTable jtb;
+	JButton jb;
 	
 	ShowCour() {
 		
@@ -70,13 +72,23 @@ public class ShowCour extends JFrame {
 		// 테이블 첫번째 값 해결 가능 시 해결 요망
 		JTable jtb = new JTable(model);
 		jtb.setLocation(10, 10);;
-		jtb.setSize(800, 340);
+		jtb.setSize(700, 340);
 		JScrollPane js = new JScrollPane(jtb);
-		js.setSize(800, 340);
+		js.setSize(700, 340);
 		add(js);
+		JButton jb = new JButton("확인");
+		jb.setLocation(710, 30);
+		jb.setSize(80, 50);
+		add(jb);
 		
 		setSize(820, 400);
 		setVisible(true);
+		
+		jb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);				
+			}
+		});
 	}
 	
 	public static void main(String[] args) {
