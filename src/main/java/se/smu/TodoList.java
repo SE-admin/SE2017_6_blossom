@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 2.0.0.
+ * @version : 2.0.1.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -24,6 +24,7 @@
  	임현			1.5.0.		2017-06-04	CourName, Hide 테이블 추가
  	임현			1.5.1		2017-06-05	테이블 잔오류 해결
  	임현			2.0.0.		2017-06-05	숨기기 및 보이기 기능 추가
+ 	임현			2.0.1.		2017-06-05	테이블 정렬 구현
  * ------------------------------
  */
 
@@ -35,7 +36,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 public class TodoList extends JFrame {
 	
@@ -111,9 +112,10 @@ public class TodoList extends JFrame {
 		// 테이블 첫번째 값 해결 가능 시 해결 요망
 		JTable jtb = new JTable(model);
 		jtb.setLocation(10, 10);;
-		jtb.setSize(700, 400);
+		jtb.setSize(800, 500);
+		jtb.setRowSorter(new TableRowSorter<DefaultTableModel>(model)); // 정렬 기능
 		JScrollPane js = new JScrollPane(jtb);
-		js.setSize(700, 400);
+		js.setSize(800, 500);
 		add(js);
 	}
 		
@@ -126,8 +128,8 @@ public class TodoList extends JFrame {
 		JPanel jp2 = new JPanel();
 		JPanel jp3 = new JPanel();
 
-		jp1.setLocation(740, 50);
-		jp1.setSize(400, 60);
+		jp1.setLocation(840, 50);
+		jp1.setSize(400, 120);
 		jp1.setLayout(new GridLayout(2, 3));
 		JButton jb1 = new JButton("추가");
 		JButton jb2 = new JButton("삭제");
@@ -135,6 +137,7 @@ public class TodoList extends JFrame {
 		JButton jb4 = new JButton("과목 추가");
 		JButton jb5 = new JButton("숨기기");
 		JButton jb6 = new JButton("보이기");
+		
 		jp1.add(jb1);
 		jp1.add(jb2);
 		jp1.add(jb3);
@@ -143,7 +146,7 @@ public class TodoList extends JFrame {
 		jp1.add(jb6);
 		add(jp1);
 		
-		jp2.setLocation(740, 150);
+		jp2.setLocation(840, 220);
 		jp2.setSize(90, 180);
 		jp2.setLayout(new GridLayout(7, 1));
 		jp2.add(new JLabel("과목 명"));
@@ -155,7 +158,7 @@ public class TodoList extends JFrame {
 		jp2.add(new JLabel("숨김 여부"));
 		add(jp2);
 
-		jp3.setLocation(860, 150);
+		jp3.setLocation(960, 220);
 		jp3.setSize(200, 180);
 		jp3.setLayout(new GridLayout(7, 1));
 		JCheckBox jck1 = new JCheckBox(" 완료");
@@ -176,7 +179,7 @@ public class TodoList extends JFrame {
 		
 		ShowTable();
 
-		setSize(1200, 400);
+		setSize(1300, 550);
 		setVisible(true);
 		
 		jb1.addActionListener(new ActionListener() { // InsertList.java 참고
