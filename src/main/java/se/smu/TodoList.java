@@ -1,7 +1,7 @@
 /**
  * @title : TodoList.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 2.0.1.
+ * @version : 2.0.2.
  * @since : 2017 - 05 - 31
  * @brief : To do List
  * ------------------------------
@@ -25,6 +25,7 @@
  	임현			1.5.1		2017-06-05	테이블 잔오류 해결
  	임현			2.0.0.		2017-06-05	숨기기 및 보이기 기능 추가
  	임현			2.0.1.		2017-06-05	테이블 정렬 구현
+ 	임현			2.0.2.		2017-06-05	완료했을 시 숨기기 기능 추가
  * ------------------------------
  */
 
@@ -52,7 +53,6 @@ public class TodoList extends JFrame {
 	static String FinishDay;
 	static String Finish;
 	static String Importance;
-	static String Hide;
 	
 	String ModiListName;
 	String ModiDeadLine;
@@ -71,7 +71,7 @@ public class TodoList extends JFrame {
 	 */
 	public void ShowTable () {
 		// 기본 변수 선언
-		String row[]={"  B l o s s o m", "과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요 여부", "숨김 여부"};
+		String row[]={"  B l o s s o m", "과목명", "To do List", "마감 기한", "실제 마감일", "완료 여부", "중요 여부"};
 		Connection conn = null;
 		String sql;
 		String str=null;
@@ -79,6 +79,7 @@ public class TodoList extends JFrame {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		DefaultTableModel model = new DefaultTableModel(row, 0);
+		int i;
 
 		try{
 			// DB연동
@@ -92,11 +93,11 @@ public class TodoList extends JFrame {
 			if (showHide == true)
 				rs = st.executeQuery("select * from Listinfo");
 			else 
-				rs = st.executeQuery("select * from Listinfo where Hide = 'X'");
+				rs = st.executeQuery("select * from Listinfo where Finish = 'X'");
 			
 			while(rs.next())
 			{
-				for(int i = 1; i < 8; i++)
+				for(i = 1; i < 7; i++)
 				{
 					row[i]=rs.getString(i);
 				}
@@ -148,22 +149,20 @@ public class TodoList extends JFrame {
 		
 		jp2.setLocation(840, 220);
 		jp2.setSize(90, 180);
-		jp2.setLayout(new GridLayout(7, 1));
+		jp2.setLayout(new GridLayout(6, 1));
 		jp2.add(new JLabel("과목 명"));
 		jp2.add(new JLabel("To do 항목 명"));
 		jp2.add(new JLabel("마감기한"));
 		jp2.add(new JLabel("실제 마감일"));
 		jp2.add(new JLabel("완료 여부"));
 		jp2.add(new JLabel("중요 여부"));
-		jp2.add(new JLabel("숨김 여부"));
 		add(jp2);
 
 		jp3.setLocation(960, 220);
 		jp3.setSize(200, 180);
-		jp3.setLayout(new GridLayout(7, 1));
+		jp3.setLayout(new GridLayout(6, 1));
 		JCheckBox jck1 = new JCheckBox(" 완료");
 		JCheckBox jck2 = new JCheckBox(" 중요");
-		JCheckBox jck3 = new JCheckBox(" 숨김");
 		JTextField jt4 = new JTextField();
 		JTextField listnameTextField = new JTextField();
 		JTextField deadlineTextField = new JTextField();
@@ -174,7 +173,6 @@ public class TodoList extends JFrame {
 		jp3.add(finishdayTextField);
 		jp3.add(jck1);
 		jp3.add(jck2);
-		jp3.add(jck3);
 		add(jp3);
 		
 		ShowTable();
@@ -192,11 +190,9 @@ public class TodoList extends JFrame {
 				else Finish = "X";
 				if (jck2.isSelected()) 	Importance = "O";
 				else Importance = "X";
-				if (jck3.isSelected()) 	Hide= "O";
-				else Hide = "X";
 				
 				ListDB listdb = new ListDB();
-				listdb.ListTable(CourName, ListName, DeadLine, FinishDay, Finish, Importance, Hide);
+				listdb.ListTable(CourName, ListName, DeadLine, FinishDay, Finish, Importance);
 				
 				ShowTable();
 			}
@@ -221,11 +217,9 @@ public class TodoList extends JFrame {
 				else ModiFinish = "X";
 				if (jck2.isSelected()) 	ModiImportance = "O";
 				else ModiImportance = "X";
-				if (jck3.isSelected()) 	Hide= "O";
-				else Hide = "X";
 				
 				// java.sql.SQLException: Operation not allowed after ResultSet closed 오류
-				new ModifyList(CourName, ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance, Hide);		
+				new ModifyList(CourName, ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);		
 				
 				ShowTable();
 			}
