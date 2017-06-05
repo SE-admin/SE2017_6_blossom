@@ -1,21 +1,22 @@
 /**
  * @title : ModifyList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.2.5.
+ * @version : 1.2.6.
  * @since : 2017 - 05 - 31
  * @brief : 리스트 수정 코드
  * ------------------------------
  * @history
-   author		version		date		brief
-        황은선      		1.0.0.      2017-05-30    초안 작성
-        황은선			1.1.0.		2017-05-31    기능 완성
-        임현			1.1.1.		2017-06-02	UTF-8 Type 수정
-        임현			1.2.0.		2017-06-02	매개변수 추가
-        임현			1.2.1.		2017-06-04	데이터베이스 연동 수정
-        임현			1.2.2.		2017-06-04	데이터베이스 연동 수정
-        황은선			1.2.3.		2017-06-04	DB에 CourName,Hide행 추가
-        황은선			1.2.4.		2017-06-05	수정 조건문 수정
-        임현			1.2.5.		2017-06-05	조건문 수정
+	author		version		date		brief
+	황은선      		1.0.0.      2017-05-30    초안 작성
+	황은선		1.1.0.		2017-05-31    기능 완성
+	임현			1.1.1.		2017-06-02	UTF-8 Type 수정
+	임현			1.2.0.		2017-06-02	매개변수 추가
+	임현			1.2.1.		2017-06-04	데이터베이스 연동 수정
+	임현			1.2.2.		2017-06-04	데이터베이스 연동 수정
+	황은선		1.2.3.		2017-06-04	DB에 CourName,Hide행 추가
+	황은선		1.2.4.		2017-06-05	수정 조건문 수정
+	임현			1.2.5.		2017-06-05	조건문 수정
+	임현			1.2.6.		2017-06-05	수정 결함 해결 완료
  * ------------------------------
  */
 
@@ -73,7 +74,6 @@ public class ModifyList {
 			sql = "USE ListDB";
 			st.execute(sql);
 			rs = st.executeQuery("Select * from Listinfo");
-
 			
 			while (rs.next()) {
 				ListName = rs.getString("ListName");
@@ -86,19 +86,17 @@ public class ModifyList {
 
 				if (ModiListName.equals(ListName))
 				{
-					sql = "UPDATE Listinfo SET CourName=" + "\'"+ModiCourName+"\'" + "where CourName=" + "\'" +CourName+ "\'";
+					sql = "UPDATE Listinfo SET CourName=" + "\'"+ModiCourName+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
-					sql = "UPDATE Listinfo SET ListName=" + "\'"+ModiListName+"\'" + "where ListName=" + "\'" +ListName+ "\'";
+					sql = "UPDATE Listinfo SET DeadLine=" + "\'"+ModiDeadLine+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
-					sql = "UPDATE Listinfo SET DeadLine=" + "\'"+ModiDeadLine+"\'" + "where DeadLine=" + "\'" +DeadLine+ "\'";
+					sql = "UPDATE Listinfo SET FinishDay=" + "\'"+ModiFinishDay+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
-					sql = "UPDATE Listinfo SET FinishDay=" + "\'"+ModiFinishDay+"\'" + "where FinishDay=" + "\'" +FinishDay+ "\'";
+					sql = "UPDATE Listinfo SET Finish=" + "\'"+ModiFinish+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
-					sql = "UPDATE Listinfo SET Finish=" + "\'"+ModiFinish+"\'" + "where Finish=" + "\'" +Finish+ "\'";
+					sql = "UPDATE Listinfo SET Importance=" + "\'"+ModiImportance+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
-					sql = "UPDATE Listinfo SET Importance=" + "\'"+ModiImportance+"\'" + "where Importance=" + "\'" +Importance+ "\'";
-					st.execute(sql);
-					sql = "UPDATE Listinfo SET Hide=" + "\'"+ModiHide+"\'" + "where Hide=" + "\'" +Hide+ "\'";
+					sql = "UPDATE Listinfo SET Hide=" + "\'"+ModiHide+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
 				}
 			}
