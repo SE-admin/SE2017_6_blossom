@@ -1,7 +1,7 @@
 /**
  * @title : Login.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.4.2.
+ * @version : 1.5.0.
  * @since : 2017 - 05 - 29
  * @brief : 로그인 코드
  * ------------------------------
@@ -20,6 +20,7 @@
  	임현			1.4.0.		2017-06-03	로그인 성공 할 시 TodoList, 실패 할 시 ErrorMessage
  	임현			1.4.1.		2017-06-04	데이터베이스 연동 수정
  	임현			1.4.2.		2017-06-04	데이터베이스 연동 수정
+ 	임현			1.5.0.		2017-06-05	탈퇴된 계정 복구 삭제
  * ------------------------------
  */
 
@@ -64,15 +65,13 @@ public class Login extends JFrame{
 		
 		jp1.setLocation(10, 120);
 		jp1.setSize(300, 100);
-		jp1.setLayout(new GridLayout(2,2));
+		jp1.setLayout(new GridLayout(3, 1));
 		JButton jb1 = new JButton("로그인");
 		JButton jb2 = new JButton("회원가입");
 		JButton jb3 = new JButton("로그인 문제 해결");
-		JButton jb4 = new JButton("탈퇴한 계정 복구");
 		jp1.add(jb1);
 		jp1.add(jb2);
 		jp1.add(jb3);
-		jp1.add(jb4);
 		add(jp1);
 
 		jp2.setLocation(10, 10);
