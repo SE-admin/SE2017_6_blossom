@@ -1,7 +1,7 @@
 /**
  * @title : ModifyList.java
  * @author : 황은선 (201511077@sangmyung.kr)
- * @version : 1.2.6.
+ * @version : 1.3.0.
  * @since : 2017 - 05 - 31
  * @brief : 리스트 수정 코드
  * ------------------------------
@@ -17,6 +17,7 @@
 	황은선		1.2.4.		2017-06-05	수정 조건문 수정
 	임현			1.2.5.		2017-06-05	조건문 수정
 	임현			1.2.6.		2017-06-05	수정 결함 해결 완료
+	임현			1.3.0.		2017-06-06	HIDE 삭제
  * ------------------------------
  */
 
@@ -37,17 +38,15 @@ public class ModifyList {
 	static String ModiFinishDay;
 	static String ModiFinish;
 	static String ModiImportance;
-	static String ModiHide;
 	static String CourName;
 	static String ListName;
 	static String DeadLine;
 	static String FinishDay;
 	static String Finish;
 	static String Importance;
-	static String Hide;
 
 	// 수정된 List정보 입력
-	public ModifyList(String ModiCourName, String ModiListName, String ModiDeadLine, String ModiFinishDay, String ModiFinish, String ModiImportance, String ModiHide) {
+	public ModifyList(String ModiCourName, String ModiListName, String ModiDeadLine, String ModiFinishDay, String ModiFinish, String ModiImportance) {
 
 		this.ModiCourName = ModiCourName;
 		this.ModiListName = ModiListName;
@@ -55,7 +54,6 @@ public class ModifyList {
 		this.ModiFinishDay = ModiFinishDay;
 		this.ModiFinish = ModiFinish;
 		this.ModiImportance = ModiImportance;
-		this.ModiHide = ModiHide;
 		
 		try {
 			// 기본 변수 선언
@@ -82,7 +80,6 @@ public class ModifyList {
 				FinishDay = rs.getString("FinishDay");
 				Finish = rs.getString("Finish");
 				Importance = rs.getString("Importance");
-				Hide = rs.getString("Hide");
 
 				if (ModiListName.equals(ListName))
 				{
@@ -95,8 +92,6 @@ public class ModifyList {
 					sql = "UPDATE Listinfo SET Finish=" + "\'"+ModiFinish+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
 					sql = "UPDATE Listinfo SET Importance=" + "\'"+ModiImportance+"\'" + "where ListName=" + "\'" +ListName+ "\'";
-					st.execute(sql);
-					sql = "UPDATE Listinfo SET Hide=" + "\'"+ModiHide+"\'" + "where ListName=" + "\'" +ListName+ "\'";
 					st.execute(sql);
 				}
 			}
@@ -111,6 +106,6 @@ public class ModifyList {
 	}
 
 	public static void main(String[] args) {
-		new ModifyList(ModiCourName, ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance, ModiHide);
+		new ModifyList(ModiCourName, ModiListName, ModiDeadLine, ModiFinishDay, ModiFinish, ModiImportance);
 	}
 }
