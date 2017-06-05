@@ -26,6 +26,7 @@
  	임현			2.0.0.		2017-06-05	숨기기 및 보이기 기능 추가
  	임현			2.0.1.		2017-06-05	테이블 정렬 구현
  	임현			2.0.2.		2017-06-05	완료했을 시 숨기기 기능 추가
+ 	임현			2.1.0.		2017-06-06	과목 정보 표시
  * ------------------------------
  */
 
@@ -136,8 +137,8 @@ public class TodoList extends JFrame {
 		JButton jb2 = new JButton("삭제");
 		JButton jb3 = new JButton("변경");
 		JButton jb4 = new JButton("과목 추가");
-		JButton jb5 = new JButton("숨기기");
-		JButton jb6 = new JButton("보이기");
+		JButton jb5 = new JButton("과목 정보");
+		JButton jb6 = new JButton("숨김 / 보임");
 		
 		jp1.add(jb1);
 		jp1.add(jb2);
@@ -233,14 +234,16 @@ public class TodoList extends JFrame {
 		
 		jb5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				showHide = false;
-				ShowTable();
+				new ShowCour();
 			}
 		});
 		
 		jb6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				showHide = true;
+				if (showHide == true)
+					showHide = false;
+				else if (showHide == false)
+					showHide = true;
 				ShowTable();
 			}
 		});
