@@ -14,6 +14,7 @@
  	임현			1.2.0.		2017-06-05	외부 MYSQL 서버 구축 자하랑 PC (H409)
  	임현			1.2.1.		2017-06-05	localhost 복구
  	임현			1.2.2.		2017-06-08	데이터베이스 변수 추가
+ 	임현			1.2.3.		2017-06-08	USE 추가
  * ------------------------------
  */
 
@@ -37,5 +38,5 @@ public class DataBaseConn {
 	// 비밀번호
 	public static String PASSWORD = "0000";
 	
-	public static String DATABASE = "Blossom";
+	public static String DATABASE = "USE BlossomDB";
 }
