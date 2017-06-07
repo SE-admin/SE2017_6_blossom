@@ -1,7 +1,7 @@
 /**
  * @title : DataBaseConn.java
  * @author : 임현 (201511054@sangmyung.kr)
- * @version : 1.2.1.
+ * @version : 1.2.2.
  * @since : 2017 - 06 - 04
  * @brief : 데이터 베이스 연동 String
  * ------------------------------
@@ -13,6 +13,7 @@
  	임현			1.1.0.		2017-06-04	MYSQL 다른 버전용 명령어 추가
  	임현			1.2.0.		2017-06-05	외부 MYSQL 서버 구축 자하랑 PC (H409)
  	임현			1.2.1.		2017-06-05	localhost 복구
+ 	임현			1.2.2.		2017-06-08	데이터베이스 변수 추가
  * ------------------------------
  */
 
@@ -26,15 +27,15 @@ public class DataBaseConn {
 	public static String URL = "jdbc:mysql://localhost:3306/mysql?serverTimezone=UTC&useSSL=false";
 	// public static String URL = "jdbc:mysql://localhost:3306/mysql?=UTC&useSSL=false";
 	
-	// 외부 서버 연결
+	// 외부 서버(H409) 연결
 	// public static String URL = "jdbc:mysql://192.168.0.35:3306/mysql?serverTimezone=UTC&useSSL=false";
 	// public static String URL = "jdbc:mysql://192.168.0.35:3306/mysql?=UTC&useSSL=false";
-	
-	//public static String URL = "jdbc:sqlplus://mango.smu.ac.kr:3306/mysql?serverTimezone=UTC&useSSL=false";
 	
 	// 아이디
 	public static String ID = "root";
 	
 	// 비밀번호
 	public static String PASSWORD = "0000";
+	
+	public static String DATABASE = "Blossom";
 }
